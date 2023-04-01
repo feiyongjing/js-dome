@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>初识vue</title>
+
+</head>
+
+<body>
+
+    <div class="root">
+        <!-- 标签的内容引用Vue对象（插值语法）：使用两组花括号包裹引用Vue对象属性中的数据或者是一个js表达式（这个表达式会返回一个值），
+            注意当然前提是当前标签是Vue对象管理的容器内部  -->
+        <!-- 标签的属性引用Vue对象（指令语法）：使用v-bind:单向绑定标签属性（或者直接简写为:绑定属性），
+            值可以直接使用Vue对象属性中的数据或者是一个js表达式（这个表达式会返回一个值），
+            当Vue对象属性中的数据发生变化时与数据绑定的标签属性也会变化，但是反过来当属性发送变化时Vue对象属性中的数据不会变化
+         -->
+        <div>hello <a v-bind:href="url">{{name}}</a></div>
+        <!-- 标签的属性引用Vue对象（指令语法）：使用v-bind:绑定属性（或者直接简写为:绑定属性），
+            值使用Vue对象属性中的数据并且调用JS的函数转大写 -->
+        <div v-bind:xyx="xyx.toUpperCase()"></div>
+
+
+        <!-- 标签的属性引用Vue对象（指令语法）：
+            使用v-model:双向绑定标签属性（或者直接简写为v-model省略value，因为v-model:双向绑定标签属性只能用在表单类具有输入的标签上的value属性）,
+            值可以直接使用Vue对象属性中的数据或者是一个js表达式（这个表达式会返回一个值），
+            当Vue对象属性中的数据发生变化时与数据绑定的标签属性也会变化，反过来当属性发送变化时Vue对象属性中的数据也会变化
+         -->
+        <div>请输入英雄名称 <input type="text" v-model:value="name"> </div>
+
+
+        <!--标签的属性引用Vue对象（指令语法）：
+            使用v-on:绑定事件函数（或者直接简写为@）,  
+            如果不传递参数就是默认携带Event参数，但是一旦传递了参数，需要使用$event传递参数
+        -->
+        <button v-on:click="showInfo($event)">显示技能信息</button>
+    </div>
+    </div>
+
+    <script type="text/javascript" src="./js/vue.js"></script>
+    <script type="text/javascript" src="./js/testo1.js"></script>
+
+
+</body>
+
+</html>

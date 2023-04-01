@@ -1,0 +1,16 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "34525559",
+      "name": "wifi",
+      "font_class": "wifi",
+      "unicode": "e765",
+      "unicode_decimal": 59237
+    }
+  ]
+}

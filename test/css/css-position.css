@@ -1,0 +1,44 @@
+.css-position{
+    width: 300px;
+    height: 300px;
+    background-color:#f66daa;  
+    /* 后代元素如果需要设置绝对定位，则祖辈元素必须设置position: relative;声明，
+    否则依次向上级元素查找，如果所有的上级元素都找不到就按照顶层文档作为绝对定位的相对位置 */
+    position: relative;
+    margin-left: 300px;
+}
+
+
+.positionRelative{
+    width: 100px;
+    height: 100px;
+    background-color:rgb(75, 245, 129);
+    /* 设置相对定位，子元素的左上角针对父元素的相对位置，
+    left设置从左到右的位置，right设置从右到左的位置,bottom设置从下到上的位置，top设置从上到下的位置 */
+    position: relative;
+    left: 100px;
+    top: 50px;
+}
+
+.positionAbsolute{
+    width: 100px;
+    height: 100px;
+    background-color:rgb(184, 55, 249);
+    /* 设置绝对定位，与相对定位的区别是会覆盖同级的元素（后面的覆盖前面的），子元素的左上角针对上个设置了position: relative定位祖辈元素的相对位置，
+    也就是说父辈元素的位置变化对设置绝对定位的子元素也会跟着一起移动
+    left设置从左到右的位置，right设置从右到左的位置,bottom设置从下到上的位置，top设置从上到下的位置*/
+    position: absolute;
+    left: 200px;
+    top: 50px;
+}
+
+.positionFixed{
+    width: 100px;
+    height: 100px;
+    background-color:rgb(75, 240, 238);
+    /* 设置固定定位，固定在浏览器页面
+    left设置从左到右的位置，right设置从右到左的位置,bottom设置从下到上的位置，top设置从上到下的位置*/
+    position: fixed;
+    right: 100px;
+    top: 50px;
+}
