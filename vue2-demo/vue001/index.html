@@ -11,11 +11,13 @@
 
 <body>
 
-    <div class="root">
-        <!-- 标签的内容引用Vue对象（插值语法）：使用两组花括号包裹引用Vue对象属性中的数据或者是一个js表达式（这个表达式会返回一个值），
+    <div class="event">
+        <!-- 标签的内容引用Vue对象（插值语法）：使用两组花括号包裹引用Vue对象属性中的数据或者是一个js表达式
+            （这个表达式只允许使用Vue对象属性，使用其他的属性变量会报错，表达式返回一个值），
             注意当然前提是当前标签是Vue对象管理的容器内部  -->
         <!-- 标签的属性引用Vue对象（指令语法）：使用v-bind:单向绑定标签属性（或者直接简写为:绑定属性），
-            值可以直接使用Vue对象属性中的数据或者是一个js表达式（这个表达式会返回一个值），
+            值可以直接使用Vue对象属性中的数据或者是一个js表达式
+            （这个表达式只允许使用Vue对象属性，使用其他的属性变量会报错，表达式返回一个值），
             当Vue对象属性中的数据发生变化时与数据绑定的标签属性也会变化，但是反过来当属性发送变化时Vue对象属性中的数据不会变化
          -->
         <div>hello <a v-bind:href="url">{{name}}</a></div>
@@ -26,7 +28,8 @@
 
         <!-- 标签的属性引用Vue对象（指令语法）：
             使用v-model:双向绑定标签属性（或者直接简写为v-model省略value，因为v-model:双向绑定标签属性只能用在表单类具有输入的标签上的value属性）,
-            值可以直接使用Vue对象属性中的数据或者是一个js表达式（这个表达式会返回一个值），
+            值可以直接使用Vue对象属性中的数据或者是一个js表达式
+            （这个表达式只允许使用Vue对象属性，使用其他的属性变量会报错，表达式返回一个值），
             当Vue对象属性中的数据发生变化时与数据绑定的标签属性也会变化，反过来当属性发送变化时Vue对象属性中的数据也会变化
          -->
         <div>请输入英雄名称 <input type="text" v-model:value="name"> </div>
@@ -36,13 +39,91 @@
             使用v-on:绑定事件函数（或者直接简写为@）,  
             如果不传递参数就是默认携带Event参数，但是一旦传递了参数，需要使用$event传递参数
         -->
-        <button v-on:click="showInfo($event)">显示技能信息</button>
+        <button v-on:click="showSkill($event)">显示技能信息</button>
+
+
+
+        <!-- prevent取消浏览器对当前事件的默认行为，比如a标签的跳转，并且还可以重定向到其他的事件函数 -->
+        <a v-bind:href="url" @click.prevent="showBackground($event)">a标签链接是指向英雄图片，但是点击事件会被阻止，重定向到其他的事件函数</a>
+
+        <!-- stop禁止在子元素与父元素重叠的部分触发事件时触发父元素事件，而是只触发子元素 -->
+        <div>以下背景点击左边出现原英雄皮肤，点击右边出现无畏号墨菲特皮肤</div>
+        <div @click="showImg" style="width: 100%;height: 500px;background-color: green;position: relative;">
+            <div @click.stop="showWuweihaoImg($event)"
+                style="width: 50%;height: 500px;background-color: red;position: absolute;left: 50%;"></div>
+        </div>
+
+        <!-- once只有第一次事件触发时调用事件函数，之后的点击不会触发
+        -->
+        <button @click.once="showSkill($event)">弹窗显示技能信息，并且只有第一次点击生效</button>
+
+        <!-- 当触发子元素事件时会同时触发父元素事件，默认是先触发父元素事件然后触发子元素事件，capture会让父元素事件先触发然后触发子元素事件 -->
+        <div @click.capture="testlog(1)" style="width: 300px;height: 300px;background-color: green;">
+            点击父元素出现1
+            <div @click="testlog(2)" style="width: 100px;height: 100px;background-color: red;">
+                点击子元素出现2
+            </div>
+        </div>
+
+        <!-- 当触发子元素事件时会同时触发父元素事件，默认是先触发父元素事件然后触发子元素事件，self禁止其他元素的事件触发当前元素的事件
+             如下子元素事件部分触发父元素事件
+        -->
+        <div @click.self="testlog(3)" style="width: 300px;height: 300px;background-color: rgb(14, 152, 232);">
+            点击父元素出现3
+            <div @click="testlog(4)" style="width: 100px;height: 100px;background-color: red;">
+                点击子元素出现4
+            </div>
+        </div>
+
+        <!-- 以上prevent、stop、once、capture、self是可以在一个标签中连着使用 -->
+        <div @click="testlog(1)" style="width: 300px;height: 300px;background-color: rgb(188, 75, 253);">
+            点击父元素出现1
+            <a v-bind:href="url"
+                @click.prevent.stop="showBackground($event)">a标签链接是指向英雄图片，但是点击事件会被阻止，重定向到其他的事件函数，并且禁止父元素事件的触发</a>
+        </div>
+
+        <!-- 键盘输入事件，enter代表当按下回车才会触发事件
+            delete代表按下delete或Backspace退格键
+            esc代表按下esc退出键
+            space代表按下空格键
+            tab代表换行键，特殊按键会将焦点切换到其他元素上使用keyup无法正常工作，需要使用keydown
+            up代表上
+            down代表下
+            left代表左
+            right代表右
+            caps-lock代表大小写切换键
+            .分割代表组合键，例如ctrl.y代表Ctrl+y
+            一些键如果不知道请使用事件event.key获取按键的名称，然后全部转小写使用中划线分割
+            但是仍然有一些按键是无法使用的比如F1这些键
+        -->
+        <input type="text" @keyup.enter="testKeyup" placeholder="键盘事件敲下回车键盘松开时控制台打印输出的信息" style="width: 100%;">
+
     </div>
+
+    <div class="computedV">
+        <div>
+            姓：<input type="text" v-model="firstName"><br /><br />
+            名：<input type="text" v-model="lastName"><br /><br />
+            姓名：<span>{{fullName}}</span><br /><br />
+            姓名：<span>{{fullName}}</span>
+        </div>
+    </div>
+
+    <!-- class值不能是watch和watchV -->
+    <div class="watchVm">
+
+        <h1>今天天气很{{info}}</h1>
+        <button @click="changeWeather">切换天气</button>
+        <h1>a的值是{{numbers.a}}</h1>
+        <button @click="numbers.a++">点我a+1</button>
+        <h1>b的值是{{numbers.b}}</h1>
+        <button @click="numbers.b++">点我b+1</button>
     </div>
 
     <script type="text/javascript" src="./js/vue.js"></script>
-    <script type="text/javascript" src="./js/testo1.js"></script>
-
+    <script type="text/javascript" src="./js/event.js"></script>
+    <script type="text/javascript" src="./js/computed.js"></script>
+    <script type="text/javascript" src="./js/watch.js"></script>
 
 </body>
 
