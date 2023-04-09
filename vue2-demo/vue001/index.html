@@ -154,15 +154,45 @@
             <div v-else-if="n===3">n=3时显示Vue</div>
             <div v-else>如果n不等于1、2、3、就显示哈哈</div>
         </template>
-
     </div>
-
-    <script type="text/javascript" src="./js/vue.js"></script>
-    <script type="text/javascript" src="./js/event.js"></script>
-    <script type="text/javascript" src="./js/computed.js"></script>
-    <script type="text/javascript" src="./js/watch.js"></script>
-    <script type="text/javascript" src="./js/classAndcss.js"></script>
-
+    <div class="listRenderingVm">
+        <h3>姓名和年龄数字列表遍历</h3>
+        <input type="text" placeholder="请输入姓名" v-model="keyWord">
+        <button @click="{{sortType=1}}">按年龄升序排列</button>
+        <button @click="{{sortType=2}}">按年龄降序排列</button>
+        <button @click="{{sortType=0}}">按年龄原顺序排列</button>
+        <button @click=updatepersons>点击将马冬梅替换成马老师</button>
+        <ul>
+            <!-- 数组遍历 -->
+            <!-- 列表中的p in filPersons 代表对vue中的filPersons属性遍历，key需要绑定列表中的唯一标识ID，并且key必须要有 -->
+            <!-- 如果是(a,b) in filPersons 也代表对vue中的filPersons属性遍历不过多的第二个参数是filPersons属性的index -->
+            <!-- 如果不写key的绑定默认绑定index，注意使用filPersons属性的index作为key则在已有列表中除了末尾之外插入数据是会导致后面的数据错乱 -->
+            <!-- 使用p of filPersons 也可以遍历vue中的filPersons属性 -->
+            <li v-for="p in filPersons" :key="p.id">姓名：{{p.name}}，年龄：{{p.age}}，性别：{{p.sex}}</li>
+        </ul>
+        <h3>汽车对象信息遍历</h3>
+        <ul>
+            <!-- 对象属性遍历 -->
+            <!-- 如果是(value,key) in car也代表对vue中的car属性遍历-->
+            <!-- 注意第一个参数是对象的值，第二个参数是对象的属性名称 -->
+            <li v-for="(value,key) in car">{{value}}:{{key}}</li>
+        </ul>
+        <div>姓名：{{student.name}}，性别：{{student.sex}}</div>
+        <button @click=addAge>点击添加显示年龄</button>
+        <div v-if="student.age">年龄：{{student.age}}</div>
+        <h3>爱好</h3>
+        <ul>
+            <!-- 数组遍历 -->
+            <li v-for="h in student.hobby">{{h}}</li>
+        </ul>
+        <button @click=updatehobby>点击将篮球替换成乒乓球</button>
+    </div>
+    <script type="text/javascript" src="./js/vue.js"></script> <!-- 引入vue库 -->
+    <script type="text/javascript" src="./js/event.js"></script> <!-- vue的事件操作 -->
+    <script type="text/javascript" src="./js/computed.js"></script> <!-- vue的计算属性 -->
+    <script type="text/javascript" src="./js/watch.js"></script> <!-- watch监视器 -->
+    <script type="text/javascript" src="./js/classAndcss.js"></script> <!-- class和css样式绑定、条件渲染 -->
+    <script type="text/javascript" src="./js/listRendering.js"></script> <!-- 列表渲染 -->
 </body>
 
 </html>
