@@ -120,10 +120,48 @@
         <button @click="numbers.b++">点我b+1</button>
     </div>
 
+    <div class="classAndcssVm">
+        <!-- 绑定class可以绑定相应的css样式 -->
+        <!-- 单个class绑定 -->
+        <div class="basic" :class="a">元素变化的部分class是{{a}}</div>
+        <button @click="changeMod">点击切换元素的部分class</button>
+
+        <!-- 绑定一组class，个数和class的名称不确定时使用 -->
+        <div class="basic" :class="classarr">元素变化的部分class是{{classarr}}</div>
+        <button @click="changeModClassarr">点击切换元素的部分class</button>
+
+        <!-- 绑定一组class，class的名称确定，不确定是否使用指定class时使用 -->
+        <div class="basic" :class="classobj">元素变化的部分class是{{classobj}}</div>
+        <button @click="changeModClassobj">点击切换元素的部分class</button>
+
+        <!-- 绑定一组css样式 -->
+        <div class="basic" :style="styleobj">元素变化的部分css是{{styleobj}}</div>
+        <button @click="changeModStyleobj">点击切换元素的部分css</button>
+
+
+        <!-- vue拥有v-show和v-if等判断标签是否显示 -->
+        <div v-show="true">v-show的属性是true就显示，false就不显示</div>
+
+        <h1>n的值是{{n}}</h1>
+        <button @click="n++">点我n+1</button>
+        <!-- v-if和v-else-if的值都是一个布尔值，如果是true就显示标签，否则就不显示 -->
+        <!-- v-if与v-else-if、v-else不能被其他的标签分隔开 -->
+        <!-- template标签和v-if一起使用不会破坏DOM结构最终在页面上不会显示出来 -->
+        <!-- template标签不能配合v-show一起使用 -->
+        <template>
+            <div v-if="n===1">n=1时显示Angular</div>
+            <div v-else-if="n===2">n=2时显示React</div>
+            <div v-else-if="n===3">n=3时显示Vue</div>
+            <div v-else>如果n不等于1、2、3、就显示哈哈</div>
+        </template>
+
+    </div>
+
     <script type="text/javascript" src="./js/vue.js"></script>
     <script type="text/javascript" src="./js/event.js"></script>
     <script type="text/javascript" src="./js/computed.js"></script>
     <script type="text/javascript" src="./js/watch.js"></script>
+    <script type="text/javascript" src="./js/classAndcss.js"></script>
 
 </body>
 
