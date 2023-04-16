@@ -85,7 +85,7 @@ const listRenderingVm = new Vue({
 
         },
 
-    },
+    }
 
     // 列表过滤和排序watch实现
     // watch: {
