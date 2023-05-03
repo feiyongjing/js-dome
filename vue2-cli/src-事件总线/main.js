@@ -7,10 +7,6 @@
 import Vue from 'vue'
 // 引入App组件，它是所有组件的父组件
 import App from './App.vue'
-// 引入插件
-import {myPlugin} from './js/plugins'
-// 应用插件，第一个参数是插件，后面的其他参数依次对应插件install方法中参数的位置，注意install方法的第一个参数是Vue
-Vue.use(myPlugin)
 // 关闭Vue的生产提示
 Vue.config.productionTip = false
 // 创建Vm，vm管理App容器，并将App组件放入App容器
