@@ -35,11 +35,16 @@ const getJSON = function (url) {
 
         const headler = function () {
             if (this.readyState !== 4) {
-                // 0 1 2 3 4 只有4是请求完成
+                // readyState存有 XMLHttpRequest 的状态。从 0 到 4 发生变化。
+                // 0: 请求未初始化
+                // 1: 服务器连接已建立
+                // 2: 请求已接收
+                // 3: 请求处理中
+                // 4: 请求已完成，且响应已就绪
                 return;
             }
+            // status是http请求响应码
             if (this.status === 200) {
-
                 resolve(this.response);
             } else {
                 reject(new Error(this.statusText));
@@ -49,6 +54,7 @@ const getJSON = function (url) {
         const client = new XMLHttpRequest();
         // open设置请求方式、请求url
         client.open("GET", url);
+        // 当XMLHttpRequest中的readyState发生变化时会调用onreadystatechange函数
         client.onreadystatechange = headler;
         // post请求需要添加content-type
         // client.setRequestHeader("content-type","application/json; charset=UTF-8")
@@ -56,7 +62,7 @@ const getJSON = function (url) {
         client.setRequestHeader("accept", "application/json")
         // onload是请求完成触发的事件，也就是回调函数
         // client.onload() = function () { console.log(JSON.parse(client.responseText)) }
-        
+
         // 发送请求，如果是POST请求需要在send函数中添加body参数
         client.send();
     })
