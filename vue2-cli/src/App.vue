@@ -3,42 +3,23 @@
   <div id="app">
     <!-- assets文件夹一般都是放静态资源 -->
     <img alt="Vue logo" src="./assets/logo.png" />
-    <!-- <School></School> -->
 
-    <Top />
-    <Todos />
-
-    <LocalStorage />
-    <SessionStorage />
   </div>
 </template>
 
 <script>
 // components文件夹下放App组件之外的所以组件
-import School from "./components/School.vue";
-import Top from "./components/Top.vue";
-import Todos from "./components/Todos.vue";
+// import School from "./components/School.vue";
 
-import LocalStorage from "./components/LocalStorage.vue";
-import SessionStorage from "./components/SessionStorage.vue";
 
 export default {
   name: "App",
   components: {
-    School,
-    Top,
-    Todos,
-    LocalStorage,
-    SessionStorage,
+
   },
   data() {
     return {
-      // 从sessionStorage获取数据，当sessionStorage中的数据是null时获取默认的初始化数据
-      // todos: JSON.parse(sessionStorage.getItem("todos")) || [
-      //   { id: "001", title: "抽烟", done: true },
-      //   { id: "002", title: "喝酒", done: false },
-      //   { id: "003", title: "烫头", done: true },
-      // ],
+
     };
   },
 
