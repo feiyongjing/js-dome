@@ -7,19 +7,18 @@
 import Vue from 'vue'
 // 引入App组件，它是所有组件的父组件
 import App from './App.vue'
-// 引入插件
-import {myPlugin} from './js/plugins'
-// 应用插件，第一个参数是插件，后面的其他参数依次对应插件install方法中参数的位置，注意install方法的第一个参数是Vue
-Vue.use(myPlugin)
+
+
+// 使用vuex需要引入自己编写的store，如果是在index文件就只需要提供目录即可，默认会在目录下查找index.js文件
+import store from './store/index'
+
 // 关闭Vue的生产提示
 Vue.config.productionTip = false
+
 // 创建Vm，vm管理App容器，并将App组件放入App容器
-new Vue({
+const vm=new Vue({
+  // 使用store
+  store,
   // reande函数是用于渲染模板
   render: h => h(App),
-  
-  beforeCreate(){
-    // 安装全局数据总线，所有组件可以拿到Vue原型上的$bus，$bus应用当前应用的Vm后所有组件就可以操作$bus绑定事件和触发、解绑事件
-    Vue.prototype.$bus=this  
-  }
 }).$mount('#app')
