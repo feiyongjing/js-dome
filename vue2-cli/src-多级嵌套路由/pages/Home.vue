@@ -4,14 +4,16 @@
     <div>
       <ul class="nav nav-tabs">
         <li>
+          <!-- 注意to跳转的路由路径需要写全路径 -->
           <router-link
             class="list-group-item"
             active-class="active"
-            to="/home/massage"
+            to="/home/massage"   
             >massage</router-link
           >
         </li>
         <li>
+          <!-- 注意to跳转的路由路径需要写全路径 -->
           <router-link
             class="list-group-item"
             active-class="active"
