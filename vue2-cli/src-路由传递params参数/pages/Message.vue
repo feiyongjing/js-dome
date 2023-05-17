@@ -1,23 +1,21 @@
 <template>
   <div>
     <ul>
-      <li v-for="massage in massageList" :key="massage.id">
+      <li v-for="message in messageList" :key="message.id">
         <!-- 跳转路由并携带params路径参数，to的字符串写法，需要使用反引号包裹并且js变量需要使用${}包裹 -->
-        <!-- <router-link :to="`/home/massage/detail/${massage.id}/${massage.title}`">{{massage.title}}</router-link> -->
+        <!-- <router-link :to="`/home/message/detail/${message.id}/${message.title}`">{{message.title}}</router-link> -->
 
-        <!-- 跳转路由并携带params路径参数和query表单参数，to的对象写法，注意的是传递params参数不能使用path的属性值
+        <!-- 跳转路由并携带params路径参数，to的对象写法，注意的是传递params参数不能使用path的属性值
         只能使用路由名称name: 'detail'指定路由并且路由名称只能使用单引号包裹 -->
         <router-link
           :to="{
             name: 'detail',
             params: {
-              id: massage.id,
-            },
-            query: {
-              title: massage.title,
+              id: message.id,
+              title: message.title,
             },
           }"
-          >{{ massage.title }}</router-link>
+          >{{ message.title }}</router-link>
       </li>
     </ul>
 
@@ -28,10 +26,10 @@
 
 <script>
 export default {
-  name: "Massage",
+  name: "Message",
   data() {
     return {
-      massageList: [
+      messageList: [
         { id: "001", title: "消息001" },
         { id: "002", title: "消息002" },
         { id: "003", title: "消息003" },

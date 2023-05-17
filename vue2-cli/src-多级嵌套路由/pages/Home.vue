@@ -8,8 +8,8 @@
           <router-link
             class="list-group-item"
             active-class="active"
-            to="/home/massage"   
-            >massage</router-link
+            to="/home/message"   
+            >message</router-link
           >
         </li>
         <li>
