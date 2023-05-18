@@ -29,6 +29,9 @@
 // reactive只能让对象类型数据做到响应式
 // 数据定义  let job = reactive({type:'前端工程师',salary:'30k'})
 // 获取数据  job.type
+
+// vue3的响应式实际上是使用创建Proxy对象来代理数据对象，
+// 做到数据的属性发生任意的变化（包含读取）时拦截并使用Reflect(反射)对被代理的对象属性进行操作
 import { ref, reactive } from "vue";
 
 export default {
