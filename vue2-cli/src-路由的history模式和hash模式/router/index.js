@@ -11,6 +11,12 @@ import Detail from '../pages/Detail'
 
 // 创建并暴露一个路由器
 const router = new VueRouter({
+
+    // mode默认是hash模式，会在域名后的路径添加/#/ 会将/#/后面的路径当成路由路径去获取前端资源
+    // history模式不会在域名后的路径添加/#/ 注意路由的路径页面刷新后直接拿着这个路径去获取后端资源而不是前端资源导致报错
+    // history模式的解决方案是通过nginx来区分前端路由和后端路由进行代理转发
+    mode: "hash",
+
     // 设置不同路径路由到不同的组件
     routes: [
         {

@@ -7,20 +7,21 @@
 import Vue from 'vue'
 // 引入App组件，它是所有组件的父组件
 import App from './App'
+// 引入VueRouter插件
+import VueRouter from 'vue-router'
+// 引入路由，路由一般写在router目录下
+import router from './router'
 
-// 引入ElementUI组件库和样式
-import ElementUI from 'element-ui';
-import 'element-ui/lib/theme-chalk/index.css';
-
-// 应用ElementUI插件
-Vue.use(ElementUI);
+// 应用VueRouter插件
+Vue.use(VueRouter)
 
 // 关闭Vue的生产提示
 Vue.config.productionTip = false
 
 // 创建Vm，vm管理App容器，并将App组件放入App容器
 const vm=new Vue({
-
+  // 使用路由
+  router,
   // reande函数是用于渲染模板
   render: h => h(App),
 }).$mount('#app')
