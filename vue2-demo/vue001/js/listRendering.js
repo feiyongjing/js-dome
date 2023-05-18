@@ -50,6 +50,15 @@ const listRenderingVm = new Vue({
             // 注意以上两种方法都只能给VM的date属性下的对象属性里面添加属性
         },
 
+        // 默认有年龄，调用方法删除年龄属性
+        delAge(){
+            // 方式1：给指定的VM删除属性
+            Vue.delete(this.student,'age')
+            // 方式2：给指定的VM删除属性
+            // this.$delete(this.student,'age')
+            // 注意以上两种方法都只能给VM的date属性下的对象属性里面添加属性
+        },
+
 
         updatehobby(){
             // 错误的写法
