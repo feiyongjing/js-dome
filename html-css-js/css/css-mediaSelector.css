@@ -1,0 +1,28 @@
+.css-mediaSelector{
+    width: 300px;
+    height: 300px;
+}
+
+/* 根据不同的屏幕尺寸显示不同的样式，768px以下是手机屏幕 */
+@media screen and (max-width: 768px) {
+    .css-mediaSelector{
+        background-color: aqua;
+    }
+    
+}
+
+/* 根据不同的屏幕尺寸显示不同的样式，768px到996px以下是平板屏幕 */
+@media screen and (min-width: 768px) and (max-width:996px) {
+    .css-mediaSelector{
+        background-color: chartreuse;
+    }
+    
+}
+
+/* 根据不同的屏幕尺寸显示不同的样式，996px以上是电脑屏幕 */
+@media screen and (min-width: 996px) {
+    .css-mediaSelector{
+        background-color: red;
+    }
+    
+}

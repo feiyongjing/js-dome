@@ -1,0 +1,56 @@
+/* border设置边框、padding设置内边距、margin设置外边距*/
+.css-boxModel {
+    text-align: center;
+    background-color: aqua;
+    width: 100px;
+    height: 100px;
+    border: 5px solid blueviolet;
+    padding: 20px;
+    margin: 10px;
+}
+
+/* 默认浏览器有8像素的外边距，所以设置所有的标签内外边距是0，然后写具体标签内外边距时覆盖这个值
+* {
+  padding: 0;
+  margin: 0;
+} 
+*/
+
+
+/*单边框设置*/
+/* border-top:solid 5px red;
+border-bottom:solid 5px red;
+border-left:solid 5px red;
+border-right:solid 5px red; */
+
+/*padding内边距设置*/
+
+/*没有默认值，必须有值，不能是负数，会撑大容器
+  只有一个值是代表四周的内边距，
+  两个值分别代表上下和左右的内边距，
+  三个值分别代表上、左右、下的内边距
+  四个值分别代表上、右、下、左的边距
+*/
+/* padding:10px 10px 10px 10px; */
+
+/*单内边距设置*/
+/* padding-top:5px;
+padding-bottom:5px;
+padding-left:5px;
+padding-right:5px; */
+
+/*margin外边距设置*/
+
+/*默认值auto，可以是负数，用于表示元素之间的距离，垂直方向相邻元素的边距取较大的值
+  只有一个值是代表四周的外边距，
+  两个值分别代表上下和左右的外边距，
+  三个值分别代表上、左右、下的外边距
+  四个值分别代表上、右、下、左的外边距
+*/
+/* margin:10px 10px 10px 10px; */
+
+/*单外边距设置*/
+/* margin-top:5px;
+margin-bottom:5px;
+margin-left:5px;
+margin-right:5px; */

@@ -1,0 +1,37 @@
+.css-flexBox {
+    width: 500px;
+    height: 500px;
+    background-color: dimgray;
+    display: flex;
+    /*设置为弹性盒子管理盒子中的弹性子元素，默认弹性盒中的内容横向摆放*/
+    /*设置弹性盒子中弹性子元素的摆放排列，row是默认内容横向摆放、row-reverse是倒序内容横向摆放、column是纵向摆放、column-reverse是倒序纵向摆放 */
+    flex-direction: row;
+    /*设置弹性盒子中弹性子元素垂直对齐方式，flex-start靠上摆放、flex-end靠下摆放、center垂直居中摆放*/
+    justify-content: center;
+    /*设置弹性盒子中弹性子元素水平对齐方式，flex-start靠左摆放、flex-end靠右摆放、center水平居中摆放*/
+    align-items: center;
+}
+
+.flexBox1 {
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    /*设置弹性盒子中弹性子元素的权重，就是等比例的划分所有弹性子元素的宽或高，而原来设置的宽或高失效。
+      当弹性盒子中弹性子元素的摆放排列是横向摆放时等比例的划分所有弹性子元素的宽，而纵向摆放则等比例的划分所有弹性子元素的高
+    */
+    flex: 2; 
+}
+
+.flexBox2 {
+    width: 100px;
+    height: 100px;
+    background-color: green;
+    flex: 2;
+}
+
+.flexBox3 {
+    width: 100px;
+    height: 100px;
+    background-color: blue;
+    flex: 1;
+}

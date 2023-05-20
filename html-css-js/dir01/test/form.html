@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- <input placeholder="Enter some text" name="name" id="test-input"/> -->
+    <p id="values"></p>
+
+    <div class="formEvent">
+        <input name="xx" id="formOninput" placeholder="Enter some text3">
+        <!-- <input type="text" name="name1" class="formOnSelect">
+        <input type="text" name="name2" class="formOnChange"> -->
+    </div>
+
+    <script>
+        const input = document.querySelector("#test-input");
+        const log = document.getElementById("values");
+
+        // input.addEventListener("input", updateValue);
+
+        // input.oninput = updateValue
+
+        function updateValue(e) {
+            console.log('内容发生变化时实时读取输入的数据：', e.target.value)
+            log.textContent = e.target.value;
+        }
+
+        function fn1(e) {
+            console.log("内容发生变化时实时读取输入的数据： 9", e.target.value);
+            log.textContent = e.target.value;
+            
+            console.log("内容发生变化时实时读取输入的数据：j", e.target.value)
+            log.textContent = e.target.value;
+        }
+        var formOninputElement = document.querySelector("#formOninput");
+        // formOninputElement.setAttribute("placeholder", "内容发生变化时实时读取输入的数据")
+        formOninputElement.oninput = fn1
+        // formOninputElement.oninput = updateValue
+
+        // var formOnSelectElement = document.querySelector(".formOnSelect");
+        // formOnSelectElement.setAttribute("placeholder", "内容被选中了触发")
+        // formOnSelectElement.onselect = function (event) {
+        //     console.log("内容被选中了触发");
+        // }
+
+        // var formOnChangeElement = document.querySelector(".formOnChange");
+        // formOnChangeElement.setAttribute("placeholder", "内容被修改完成失去焦点或者是按下回车时触发")
+        // formOnChangeElement.onchange = function (event) {
+        //     console.log("内容被修改完成失去焦点或者是按下回车时触发");
+        // }
+    </script>
+</body>
+
+</html>

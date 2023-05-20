@@ -1,0 +1,78 @@
+.css-animation{
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    background-color: red;
+    /* 设置动画：第一个值name是自定义的动画名称，第二个值duration是动画的周期时间，
+       第三个值动画执行的速率timing-function可以设置ease(逐渐变慢默认是这个)、linear（匀速）、ease-in（加速）、
+       ease-out（减速）、ease-in-out（先加速后减速），
+       第四个值delay是设置动画开始的延时时间，
+       第五个值iteration-count是设置动画的循环次数，默认是1次，infinite是无限次
+       第六个值direction设置动画播放的方向，默认是normal是向前播放，alternate表示在偶数次向前部分在奇数次反向播放
+
+
+    */
+    animation: myAnim 8s ease-in-out 0.5s infinite normal;
+}
+
+/* hover表示鼠标滑倒选择器上的样式 */
+.css-animation:hover{
+    /* running代表运行动画效果，paused代表暂停动画效果 */
+    animation-play-state: paused;
+}
+
+
+/* myAnim是自己定义的动画名称 */
+@keyframes myAnim {
+
+    /* from指定动画开始，to指定动画结束。但是使用它们只有一个动画变化，推荐使用百分比，从0%到100%之间可以设置多个变化 */
+    /* from{
+
+    }
+    to{
+
+    } */
+
+    0%{
+        width: 100px;
+        background-color: red;
+    }
+
+    12.5%{
+        width: 200px;
+        background-color: pink;
+    }
+    25%{
+        width: 300px;
+        background-color: rgb(204, 0, 255);
+    }
+
+    37.5%{
+        width: 400px;
+        background-color: blue;
+    }
+
+    50%{
+        width: 500px;
+        background-color: rgb(0, 234, 255);
+    }
+
+    62.5%{
+        width: 600px;
+        background-color: rgb(30, 255, 0);
+    }
+    75%{
+        width: 700px;
+        background-color: yellow;
+    }
+    87.5%{
+        width: 800px;
+        background-color: orange;
+    }
+    100%{
+        width: 900px;
+        background-color: red;
+    }
+
+
+}

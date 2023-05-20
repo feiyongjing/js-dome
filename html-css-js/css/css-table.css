@@ -1,0 +1,17 @@
+/* 选择表格标记、表格中的表头标签、表格内容标签添加边框，
+border设置边框的像素、边框是实线、边框颜色。
+默认边框是双实线,border-collapse设置折叠边框，也就是双线边框变成单线 */
+.css-table,td,th {border: 1px solid red;border-collapse: collapse;}
+
+/* 设置表格的整体宽带和高度，注意这个设置有些不准确 */
+/* .css-table{width: 100%; height: 100px;} */
+
+/* 设置表格表头和表格内容单元格的宽带和高度，注意这个设置有些不准确 */
+/* .td,th{width: 30px; height: 20px;} */
+
+/* 表格内容标签文本内容水平居中，
+vertical-align设置垂直居上top、垂直居中center、垂直居下bottom
+padding设置表格填充将单元格内容与边框撑开一定距离而不用设置表格的宽高
+background-color设置单元格背景颜色
+color设置单元格文本文本颜色*/
+td {text-align: center; vertical-align: top; padding: 20px; background-color: black; color: white;}
