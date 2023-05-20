@@ -17,7 +17,8 @@ export default {
   props: ["msg", "school"],
   emits: ["hello"],
   // vue2中的data、methods、等都写在setup中
-  // setup不能被async修饰，因为返回值不再是return的对象，而是promise对象，模板看不到return对象中的属性了
+  // setup一般情况下不能被async修饰，因为返回值不再是return的对象，而是promise对象，模板看不到return对象中的属性了
+  // setup使用async并返回Promise对象的前提是该组件被异步引入并且使用Suspense标签包裹该组件标签
   // setup会在beforeCreate(最早的生命周期)之前执行一次，这时的this是undefined
   // setup的第一参数props是父组件传递的props，props必须和vue2一样在外面声明接收否则会有警告
   // setup的第二参数context中存储了一下上下文信息，其中主要是context.attrs、context.emit、context.slots
