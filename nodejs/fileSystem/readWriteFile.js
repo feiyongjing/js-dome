@@ -61,3 +61,35 @@ fs.readFile('./观书有感.txt',(err, data)=>{
 
 // 同步读取文件内容
 // console.log(fs.readFileSync('./观书有感.txt').toString())
+
+// 流式读取文件，与readFile读取相比建立了与文件的连接，减少了建立连接的打开关闭文件的次数
+// 流式读取文件是一个个块读取文件内容
+// 流式读取适用于大文件读取和频繁读取，而readFile适合读取频率低的场景
+let rs=fs.createReadStream('./观书有感.txt');
+
+// 绑定事件，事件回调函数，chunk是块
+// rs.on('data',chunk=>{
+//     console.log('块大小',chunk.length)  // 读取一个完整的块是65536字节是64kb
+//     console.log('块数据',chunk.toString())
+// })
+
+// rs.on('end',()=>{
+//     console.log('读取完成')
+// })
+
+// 复制文件方式一
+// 读取文件内容
+// let data=fs.readFileSync('./观书有感.txt')
+// 写入文件内容
+// fs.writeFileSync('./观书有感1.txt',data)
+
+// 方式二 流式操作
+// 读取文件内容
+let rs1=fs.createReadStream('./观书有感.txt')
+// 写入文件内容
+let ws1=fs.createWriteStream('./观书有感1.txt')
+
+rs1.on('data1',chunk =>{
+    ws1.write(chunk)
+})
+
