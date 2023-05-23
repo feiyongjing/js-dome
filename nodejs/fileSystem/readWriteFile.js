@@ -67,12 +67,12 @@ fs.readFile('./观书有感.txt',(err, data)=>{
 // 流式读取适用于大文件读取和频繁读取，而readFile适合读取频率低的场景
 let rs=fs.createReadStream('./观书有感.txt');
 
-// 绑定事件，事件回调函数，chunk是块
+// 绑定事件data读取数据，事件回调函数，chunk是块
 // rs.on('data',chunk=>{
 //     console.log('块大小',chunk.length)  // 读取一个完整的块是65536字节是64kb
 //     console.log('块数据',chunk.toString())
 // })
-
+// 绑定事件end关闭流
 // rs.on('end',()=>{
 //     console.log('读取完成')
 // })
@@ -83,13 +83,16 @@ let rs=fs.createReadStream('./观书有感.txt');
 // 写入文件内容
 // fs.writeFileSync('./观书有感1.txt',data)
 
-// 方式二 流式操作
+// 方式二 流式操作，优点是读取时不是整个文件全部读取到内存中再写入文件，而是一块块的读取写入到文件中
 // 读取文件内容
 let rs1=fs.createReadStream('./观书有感.txt')
 // 写入文件内容
 let ws1=fs.createWriteStream('./观书有感1.txt')
+// 绑定事件data读取数据写入其他文件
+// rs1.on('data',chunk =>{
+//     ws1.write(chunk)  // 读取一个完整的块是65536字节是64kb
+// })
 
-rs1.on('data1',chunk =>{
-    ws1.write(chunk)
-})
+// 通过管道将输出流转移到输入流中来实现快速的读取文件数据写入其他文件中
+rs1.pipe(ws1)
 
