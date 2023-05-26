@@ -4,11 +4,12 @@ const express = require('express');
 // 引入拦截器函数
 const checkCodeMiddleware=require('../interceptor/checkCodeMiddleware')
 
+// 创建路由对象
 const router= express.Router()
 
 // 使用 :参数名称 在url在占位，接收占位传递的参数
 // checkCodeMiddleware是当前路由的拦截器
-router.get('/order/:id', checkCodeMiddleware, (request, response) => {
+router.get('/:id', checkCodeMiddleware, (request, response) => {
     console.log("获取请求url中id占位的路径参数是", request.params.id)
 
     response.send('hello express')

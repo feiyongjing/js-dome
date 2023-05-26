@@ -10,6 +10,7 @@ const bodyParser = require('body-parser');
 // 引入拦截器函数
 const checkCodeMiddleware=require('../interceptor/checkCodeMiddleware')
 
+// 创建路由对象
 const router= express.Router()
 
 
@@ -27,7 +28,7 @@ var jsonParser = bodyParser.json()
 // 创建路由
 // 其实是不同的请求方法：get、post、put等
 // 参数是域名后的路径、当前路由的拦截器（其实是spring的Aop类似）、 请求回调函数，请求回调函数中的参数封装了请求和响应的全部信息
-router.get('/home', checkCodeMiddleware, (request, response) => {
+router.get('/', checkCodeMiddleware, (request, response) => {
 
     console.log("获取请求的路径", request.path)
     console.log("获取请求跟在url后面的表单参数", request.query)
@@ -53,7 +54,7 @@ router.get('/home', checkCodeMiddleware, (request, response) => {
 
 
 // jsonParser是当前路由的拦截器，是bodyParser包解析请求body的拦截器，拦截器处理后request上就多了body属性
-router.post('/home/test', jsonParser, (request, response) => {
+router.post('/test', jsonParser, (request, response) => {
     response.setHeader('content-type', 'text/html;charset=utf-8')
 
     console.log('请求body', request.body)

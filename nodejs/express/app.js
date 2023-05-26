@@ -59,16 +59,16 @@ app.use(express.static(__dirname + '/public'))
 
 // 如果前端的静态资源和后端的接口路径冲突了，那么哪边的代码先执行（代码自上而下）就哪边处理请求
 
-// home路径的接口
-app.use(home)
+// home路径的接口，第一个参数是路径前缀（也可以不设置），里面的每个接口都添加该前缀
+app.use('/home',home)
 
 
-// order路径的接口
-app.use(order)
+// order路径的接口，第一个参数是路径前缀（也可以不设置），里面的每个接口都添加该前缀
+app.use('/order',order)
 
 
-// all路径的接口
-app.use(all)
+// all路径的接口，第一个参数是路径前缀（也可以不设置），里面的每个接口都添加该前缀
+app.use('/all', all)
 
 
 // 监听端口，并启动服务
