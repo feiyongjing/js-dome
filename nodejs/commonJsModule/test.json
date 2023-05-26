@@ -1,0 +1,15 @@
+{
+    "code": "00000",
+    "data": {
+        "oilSiteCount": "47",
+        "onLineOilSiteCount": "9",
+        "offLineOilSiteCount": "38",
+        "normalOilSiteCount": "8",
+        "alarmOilSiteCount": "0",
+        "abnormalOilSiteCount": "1",
+        "alarmOilSiteTotalCount": "13330",
+        "deviceCount": "26",
+        "consumerCount": "8"
+    },
+    "msg": "一切ok"
+}

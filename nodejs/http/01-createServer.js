@@ -2,6 +2,7 @@
 const http = require('http')
 
 // 创建服务对象，参数是函数用于处理请求，函数的参数request和response分别是请求和响应的封装对象
+// 在没有配置请求路径的时候，所以的请求都会执行这个回调函数返回一样的结果
 const server=http.createServer((request,response)=>{
 
 
@@ -33,5 +34,8 @@ server.listen(9000,()=>{
     console.log('服务已经启动并且占用了9000端口')
 })
 
+// powershell和cmd的curl命令替换为curl.exe 
+// git Bash 可以使用curl
+
 // 发起请求
-// curl -H “Content-Type: application/json” -X POST -d'{"user":"123","age":"18"}' "http://127.0.0.1:9000/test"
+// curl -H 'Content-Type: application/json' -X POST -d'{"user":"123","age":"18"}' "http://127.0.0.1:9000/test"

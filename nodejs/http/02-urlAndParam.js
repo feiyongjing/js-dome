@@ -24,5 +24,8 @@ server.listen(9000, () => {
     console.log('服务已经启动并且占用了9000端口')
 })
 
+// powershell和cmd的curl命令替换为curl.exe 
+// git Bash 可以使用curl
+
 // 发起请求
 // curl "http://127.0.0.1:9000/test?keyword=99"
