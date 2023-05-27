@@ -1,0 +1,28 @@
+{
+  "accounts": [
+    {
+      "id": "h6ISMOHhW",
+      "title": "工资到账",
+      "time": "2023-05-15",
+      "type": "1",
+      "account": "5000",
+      "remarks": "工资正常到账"
+    },
+    {
+      "id": "tw7p9yB8s",
+      "title": "工资到账",
+      "time": "2023-05-15",
+      "type": "1",
+      "account": "5000",
+      "remarks": "工资正常到账"
+    },
+    {
+      "id": "QPXFy2eY-",
+      "title": "工资到账",
+      "time": "2023-05-15",
+      "type": "1",
+      "account": "5000",
+      "remarks": "工资正常到账"
+    }
+  ]
+}
