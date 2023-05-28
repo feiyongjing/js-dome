@@ -3,7 +3,12 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "nodemon ./bin/www",
+    "createConnection": "nodemon ./connection/createConnection.js",
+    "data": "nodemon ./connection/data.js",
+    "rmData": "nodemon ./connection/rmData.js",
+    "selectData": "nodemon ./connection/selectData.js",
+    "updateData": "nodemon ./connection/updateData.js"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
