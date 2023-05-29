@@ -3,14 +3,22 @@ var express = require('express');
 // 字符串转时间包 安装 npm i moment
 var moment = require('moment')
 
+// 登录session拦截判断
+var checkLoginMiddleware = require('../../middlewares/checkLoginMiddleware')
+
 const db = require('../../connection/db/db');
 const AccountsModel = require('../../connection/model/AccountsModel');
 
 // 创建路由对象
 var router = express.Router();
 
+// 首页重定向到账本记录页面
+router.get('/', checkLoginMiddleware, (req, res) => {
+  res.redirect('/account')
+});
+
 // 账本记录页面
-router.get('/account', (req, res) => {
+router.get('/account', checkLoginMiddleware, (req, res) => {
 
   AccountsModel.find()
     .then((accounts) => {
@@ -25,7 +33,7 @@ router.get('/account', (req, res) => {
 });
 
 // 添加账单页面
-router.get('/account/create', (req, res) => {
+router.get('/account/create', checkLoginMiddleware, (req, res) => {
   res.render('create');
 });
 
@@ -47,7 +55,7 @@ router.post('/account', (req, res) => {
 
 
 // 删除记录
-router.get('/account/:id', (req, res) => {
+router.get('/account/:id', checkLoginMiddleware, (req, res) => {
   let id = req.params.id
 
   AccountsModel
