@@ -3,8 +3,8 @@ var express = require('express');
 // 字符串转时间包 安装 npm i moment
 var moment = require('moment')
 
-const db = require('../connection/db/db');
-const AccountsModel = require('../connection/model/AccountsModel');
+const db = require('../../connection/db/db');
+const AccountsModel = require('../../connection/model/AccountsModel');
 
 // 创建路由对象
 var router = express.Router();
