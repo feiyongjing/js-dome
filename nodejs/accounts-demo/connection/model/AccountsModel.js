@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 //5. 创建文档的结构对象
 //设置集合中文档的属性以及属性值的类型
 let AccountsSchema = new mongoose.Schema({
+    username: {type:String},
     title: {type:String,required:true},
     time: {type:Date,required:true},
     type: {type:Number,required:true},

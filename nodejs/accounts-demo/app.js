@@ -7,7 +7,7 @@ var logger = require('morgan');
 var indexRouter = require('./routes/web/index');
 var accountRouter = require('./routes/api/account');
 var authRouter = require('./routes/web/auth');
-
+var authApiRouter = require('./routes/api/auth');
 
 // 安装session包，session会存放在内存中 npm i express-session
 const session = require('express-session');
@@ -52,9 +52,12 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
+// 使用路由规则
 app.use('/', indexRouter);
 app.use('/api', accountRouter);
 app.use('/',authRouter);
+app.use('/api',authApiRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
