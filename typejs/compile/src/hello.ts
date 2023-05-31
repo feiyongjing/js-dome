@@ -90,4 +90,36 @@ let k: myType
 // 等价于 let k= 1 | 2 | 3 | 4 | '%'
 
 
+// ts与java都有类，类都是包含属性和方法，属性的getter和setter
+// ts和java都有类的修饰符public、protected(当前类和子类)、private，但是不同的是java默认不加修饰符是当前包访问类、而ts则是public
+// ts和java都有this、super、构造器、extends继承、abstract抽象类、interface接口、泛型，它们的作用是一样的
+// ts和java都有静态属性和静态方法，它们的作用是一样的，但是ts的静态属性和方法子类也会继承
+// ts和java都有常量修饰，java的常量使用final，ts类属性常量是readonly而其他常量是const修饰
+
+class Preson {
+
+    // 如果需要使用TS标准的getter、setter则属性名称必须是下划线开头
+    // 使用TS标准的getter、setter后获取或赋值实例对象的属性时直接调用属性名会自动调用getter、和setter
+    _name: string;
+
+
+    constructor(name: string) {
+        this._name = name
+    }
+
+    set name(value: string) {
+        this._name = value
+    }
+
+    get name() {
+        return this._name;
+    }
+}
+let person= new Preson("张三")
+// 自动调用_name的get方法
+console.log(person.name)
+// 自动调用_name的set方法
+person.name="李四"
+console.log(person.name)
+
 

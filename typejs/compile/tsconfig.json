@@ -18,7 +18,7 @@
     // 编译器的选项
     "compilerOptions": {
         // target指定编译后的js代码版本，仅限于语法的转换一些API无法转换
-        "target": "ES3",
+        "target": "ES2015",
         // module指定编译后的js是哪种模块化，一般是commonjs和 ES2015（ES6） 
         "module": "ES2015",
         // lib是指定需要依赖的库，在编译时会按照这些库来检查代码，如果代码使用了lib没有指定的库会直接报错
