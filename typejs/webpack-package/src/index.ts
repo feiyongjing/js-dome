@@ -1,5 +1,9 @@
-function sum(a: number, b: number): number {
-    return a + b
-}
+import "./style/index.less";
 
-console.log(sum(984, 2933))
+import GameControl from "./moduls/GameControl";
+
+new GameControl();
+
+
+
+

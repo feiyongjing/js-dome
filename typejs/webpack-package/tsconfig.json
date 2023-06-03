@@ -34,17 +34,17 @@
 
         // alwaysStrict设置编译后的文件是否使用严格模式，默认是false，
         // 严格模式的js文件开头是"use strict"，当然如果js文件已经引入了模块那么相当于已经进入了严格模式
-        "alwaysStrict": true,
+        // "alwaysStrict": true,
 
         // noImplicitAny设置是否禁止使用隐式的any类型，默认是false，
-        "noImplicitAny": true,
+        // "noImplicitAny": true,
 
 
         // 是否禁止使用类型不明确的this，默认是false
-        "noImplicitThis": true,
+        // "noImplicitThis": true,
 
         // 是否检查空值引用（对一个null调用函数和属性） ，默认是false
-        "strictNullChecks": true
+        // "strictNullChecks": true
 
     }
 }

@@ -1,7 +1,6 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-const { EnvironmentPlugin } = require('webpack')
 
 
 module.exports = {
@@ -41,15 +40,15 @@ module.exports = {
                         // 设置babel
                         options: {
                             // 设置预定的环境
-                            preset: [
+                            presets: [
                                 [
                                     // 指定环境的插件
-                                    "@babel/preset-dev",
+                                    "@babel/preset-env",
                                     // 插件配置信息
                                     {
                                         // 配置兼容的浏览器和版本
                                         targets: {
-                                            "chrome": "88"
+                                            "chrome": "113"
                                         },
                                         // 指定corejs的版本
                                         "corejs": "3",
@@ -64,7 +63,33 @@ module.exports = {
                     'ts-loader',
                 ],
                 // 要排除的文件，这里排除的本地的依赖包文件
-                exclude: /node-modul/
+                exclude: /node-modules/
+            },
+
+            // 设置less文件的处理
+            {
+                test: /\.less$/,
+                use: [
+                    "style-loader",
+                    "css-loader",
+                    // 引入postcss
+                    {
+                        loader: "postcss-loader",
+                        options: {
+                            postcssOptions: {
+                                plugins: [
+                                    [
+                                        "postcss-preset-env",
+                                        {
+                                            browsers: "last 2 versions"
+                                        }
+                                    ]
+                                ]
+                            }
+                        }
+                    },
+                    "less-loader"
+                ]
             }
         ]
     },
