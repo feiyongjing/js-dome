@@ -18,10 +18,20 @@ class Food {
     }
 
 
-    change() {
+    change(snakeBodyXY: Set<string>) {
+        let left: number;
+        let top: number;
 
-        let left = Math.round(Math.random() * 29) * 10;
-        let top = Math.round(Math.random() * 29) * 10;
+        while (true) {
+            left = Math.round(Math.random() * 29) * 10;
+            top = Math.round(Math.random() * 29) * 10;
+
+            let XYJson = JSON.stringify({ X: left + "px", Y: top + "px" });
+            if(!snakeBodyXY.has(XYJson)){
+                break;
+            }
+            console.log("食物刷新在蛇内部了，重新刷新")
+        }
 
         this.element.style.left = left + 'px';
         this.element.style.top = top + 'px';

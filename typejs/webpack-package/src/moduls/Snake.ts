@@ -13,11 +13,17 @@ class Snake {
     // 蛇的长度
     length: number;
 
+    // 蛇的身体坐标
+    bodyXY: Set<string>;
+
 
     constructor() {
         this.element = document.getElementById('snake')!;
         this.head = new SnakeItem(document.querySelector('#snake > div')!, null);
         this.foot = new SnakeItem(document.querySelector('#snake > div')!, null);
+        this.bodyXY = new Set<string>();
+
+        this.bodyXY.add(JSON.stringify({ X: this.head.value.offsetLeft + "px", Y: this.head.value.offsetTop + "px" }))
         this.length = 1;
     }
 
@@ -54,18 +60,30 @@ class Snake {
         this.head.value.style.top = value + "px";
     }
 
-    checkEatOneself(X: number, Y: number){
-        // throw new Error('蛇吃尾巴了')
+    checkEatOneself(X: number, Y: number) {
+        let XYJson = JSON.stringify({ X: X + "px", Y: Y + "px" })
+
+        if (this.length > 4 && this.bodyXY.has(XYJson)) {
+            throw new Error('蛇吃自己了')
+        }
     }
 
 
     // 将蛇尾调到蛇头，同时更新蛇尾的位置
-    transfer(X: number, Y: number) {
+    transfer(X: number, Y: number, plugIn: boolean) {
+
+        // 去除蛇尾的地址添加蛇头的地址
+        let footXYJson = JSON.stringify({ X: this.foot.value.offsetLeft + "px", Y: this.foot.value.offsetTop + "px" })
+        this.bodyXY.delete(footXYJson)
+        let newHeadXYJson = JSON.stringify({ X: X + "px", Y: Y + "px" })
+        this.bodyXY.add(newHeadXYJson)
 
         let newFoot = this.foot.next
 
         if (X < 0 || X > 290 || Y < 0 || Y > 290) {
-            throw new Error('蛇撞墙了')
+            if(!plugIn){
+                throw new Error('蛇撞墙了')
+            }
         }
 
         let ele = this.foot.value;
@@ -101,6 +119,10 @@ class Snake {
 
         this.head.next = newHead;
         this.head = newHead;
+
+        // 添加蛇头的坐标
+        let XYJson = JSON.stringify({ X: X + "px", Y: Y + "px" })
+        this.bodyXY.add(XYJson)
 
         this.length += 1;
     }

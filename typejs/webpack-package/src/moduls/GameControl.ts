@@ -21,10 +21,13 @@ class GameControl {
     // 蛇的移动方向
     direction: string = '';
 
+    // 是否开启外挂，外挂拥有穿墙、原地掉头、可以穿过自己的身体
+    plugIn = false;
+
     constructor() {
         this.snake = new Snake();
         this.food = new Food();
-        this.scorePanel = new ScorePanel();
+        this.scorePanel = new ScorePanel(10, 10);
 
         this.init();
     }
@@ -42,7 +45,7 @@ class GameControl {
     // 修改蛇的移动方向，除非蛇是初始化长度否则不允许进行反方向的直接掉头
     keydownHandler(event: KeyboardEvent) {
 
-        if (this.snake.length !== 1) {
+        if (!this.plugIn && this.snake.length !== 1) {
             switch (event.key) {
                 case "ArrowUp":
                 case "Up":
@@ -92,12 +95,16 @@ class GameControl {
 
         try {
             // 检查吃自己
-            this.snake.checkEatOneself(X,Y);
+            if (!this.plugIn) {
+                this.snake.checkEatOneself(X, Y);
+            }
 
             // 检查吃食物
-            this.checkEat(X, Y);
-            // 将蛇尾调到蛇头，同时更新蛇尾的位置
-            this.snake.transfer(X, Y)
+            if (!this.checkEat(X, Y)) {
+                // 将蛇尾调到蛇头，同时更新蛇尾的位置
+                this.snake.transfer(X, Y,this.plugIn)
+            }
+
         } catch (e) {
             alert((e as Error).message);
             this.isLive = false;
@@ -108,7 +115,7 @@ class GameControl {
 
 
     // 检查蛇是否吃到食物
-    checkEat(X: number, Y: number) {
+    checkEat(X: number, Y: number): boolean {
         if (X === this.food.X && Y === this.food.Y) {
             // 添加分数
             this.scorePanel.addScore();
@@ -117,8 +124,10 @@ class GameControl {
             this.snake.addBody(X, Y);
 
             // 食物重新刷新变化
-            this.food.change();
+            this.food.change(this.snake.bodyXY);
+            return true;
         }
+        return false;
     }
 }
 
