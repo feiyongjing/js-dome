@@ -1,0 +1,50 @@
+{
+    // tsconfig.json是ts编译器的配置文件，ts编译器可以根据它的信息来对代码进行编译
+
+    // 编译器的选项
+    "compilerOptions": {
+        // target指定编译后的js代码版本，仅限于语法的转换一些API无法转换
+        "target": "ES2015",
+        // module指定编译后的js是哪种模块化，一般是commonjs和 ES2015（ES6） 
+        "module": "ES2015",
+
+        // 将编译后的全部代码合并到一个指定的文件中
+        // 注意如果使用了模块化需要修改module的值，只有特定的模块化才能合并模块化的代码
+        // "outFile": "./dist/app1.js",
+
+        // allowJS是否对项目下的js文件编译，默认是false
+        // "allowJs": false,
+        // checkJS是否对项目下的js文件按照ts的语法检查，默认是false
+        // "checkJs": false
+
+        // removeComments表示是否去除编译后的js文件注释是否去除，默认是false
+        // "removeComments": false
+
+        // noEmit表示是否不生成编译后的js文件，默认是false
+        // 注意虽然没有生成编译后的js文件，但是编译ts文件时的语法检查还是有的
+        // "noEmit": false
+
+        // noEmitOnError当编译有错误时是否不生成编译的js文件，默认是false
+        "noEmitOnError": true,
+
+
+        // 所有严格检查ts代码的总开关，默认是false
+        // 下面的几个都是属于代码检查，还有更多请自行查看文档
+        "strict": true,
+
+        // alwaysStrict设置编译后的文件是否使用严格模式，默认是false，
+        // 严格模式的js文件开头是"use strict"，当然如果js文件已经引入了模块那么相当于已经进入了严格模式
+        // "alwaysStrict": true,
+
+        // noImplicitAny设置是否禁止使用隐式的any类型，默认是false，
+        // "noImplicitAny": true,
+
+
+        // 是否禁止使用类型不明确的this，默认是false
+        // "noImplicitThis": true,
+
+        // 是否检查空值引用（对一个null调用函数和属性） ，默认是false
+        // "strictNullChecks": true
+
+    }
+}
