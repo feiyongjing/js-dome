@@ -1,5 +1,3 @@
-import count from "./js/count";
-
 import sum from "./js/sum";
 
 import './css/index.css';
@@ -9,6 +7,11 @@ import './stylus/index.styl';
 
 import './css/iconfont.css';
 
-const result = count(2, 1)
-console.log(result)
-console.log(sum(1, 2, 3, 4,5,6))
+console.log(sum(1, 2, 3, 4, 5, 0))
+
+new Promise((resolve) => {
+    setTimeout(() => {
+        resolve();
+    }, 1000);
+});
+

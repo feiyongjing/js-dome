@@ -3,6 +3,9 @@ module.exports = {
     // 下面rules配置的规则会覆盖继承的eslint规则检查
     extends: ["eslint:recommended"],
 
+    // 将js文件单独打包需要配置，否则会报错
+    // parser: "babel-eslint",
+
     env: {
         node: true,    // 启用node中的全局变量
         browser: true, // 启用浏览器中的全局变量
