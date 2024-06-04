@@ -13,6 +13,7 @@
 // 子类继承父类和java基本一致都是使用extends，只有一点不同的是子类也会继承父类的静态方法和静态属性
 // 可以通过子类的类名去调用父类的静态方法和属性
 class Person {
+    
 
     static staticTest(){
         return "静态方法的设置使用java一样";
