@@ -7,8 +7,13 @@
 <head>
     <!-- meta标签声明文档的元数据 -->
     <meta charset="utf-8"> <!-- meta标签中charset属性设置文档的字符编码 -->
-    <meta name="viewport" content="width-device-width, initial-scale=1.0"> <!-- 使手机端和pc端的样式一致 -->
-    <meta http-equiv="x-ua-compatible" content="ie=edge"> <!-- 使手机端和pc端的样式一致 -->
+    <meta name="viewport" content="width-device-width, initial-scale=1.0"> <!-- 使手机端和pc端的样式一致 --> 
+    <meta http-equiv="x-ua-compatible" content="ie=edge"> <!-- 针对IE浏览器的兼容性设置 -->
+
+    <!-- <meta name="keywords" content="网上购物,电商购物,电子产品"> 设置网页关键字，方便搜索引擎SEO  -->
+    <!-- <meta name="description" content="购物商城描述"> 设置网页内容描述  -->
+    <!-- <meta name="robots" content="index"> 设置网页是否可以被搜索引擎索引收录，要求不允许收录使用noindex  -->
+
     <title>考试系统</title> <!-- 在head标签中的title标签设置网页的标题 -->
 </head>
 
@@ -46,6 +51,11 @@
 
     <!-- 换行标签 -->
     <br />
+    <!-- 分割线标签 -->
+    <hr />
+
+    <!-- 原文显示标签，空格和换行都原文显示 -->
+    <pre></pre>
 
     <!-- 行标签 -->
     <span></span>
@@ -64,9 +74,9 @@
         download属性设置浏览器下载文件，如果属性值没有设置则使用默认文件名称，如果有属性值就使用属性值作为文件名称
     -->
     <a href="https://baidu.com" target="_blank" download="百度.html">a标签点击文字跳转指定页面</a>
-    <a href="tel:10010" ></a>
-    <a href="mailto:10010@qq.com" ></a>
-    <a href="sms:10086" ></a>
+    <a href="tel:10010"></a>
+    <a href="mailto:10010@qq.com"></a>
+    <a href="sms:10086"></a>
 
     <!-- 图片链接：src设置图片链接或者图片的base64字符串，alt设置图片无法显示的提示文字，width和heighe设置图片宽高，只设置一个另一个也会等比例设置 -->
     <img src="../img/OIP-C.jfif" alt="图片的路径不对" width="300px" height="180px" title="花">
@@ -74,15 +84,15 @@
     <!-- 音频标签audio，支持mp3、ogg(移动端)、wav
      autoplay是自动播放，controls是显示视频的进度条和暂停等功能，
      loop是循环播放，muted是默认静音
--->
+    -->
     <audio src="音频路径" autoplay controls loop muted> 音频显示失败时显示这行文字 </audio>
 
     <!-- 视频标签video，支持mp4、ogg(移动端)、webM(高清格式)
     autoplay是自动播放，width属性值表示宽度，heigth属性值表示高度
     controls是显示视频的进度条和暂停等功能，loop是循环播放
     muted是默认静音，poster属性值设置视频播放之前显示的图片
--->
-    <video src="视频路径" autoplay width="1000" heigth="800" controls loop muted poster="图片路径"> 视频显示失败时显示这行文字 </video>
+    -->
+    <video src="视频路径" autoplay width="300px" heigth="180px" controls loop muted poster="图片路径"> 视频显示失败时显示这行文字 </video>
 
     <h3>无序列表</h3>
     <ul>
@@ -94,20 +104,31 @@
     <h3>有序列表</h3>
     <ol>
         <li>有序列表ol+li</li>
-        <li>有序列表ol和li的属性type表示列表元素前的有序模板，属性值有A、a、1、I分别表示大写字母模板、小写字母模板、数字模板、罗马数字模板。start属性表示按照type属性模板的第几个开始，reversed属性无需设置属性值表示模板按照倒序排列</li>
+        <li>有序列表ol和li的属性type表示列表元素前的有序模板，属性值有A、a、1、I分别表示大写字母模板、小写字母模板、数字模板、罗马数字模板。start属性表示按照type属性模板的第几个开始，reversed属性无需设置属性值表示模板按照倒序排列
+        </li>
         <li>有序列表ol+li</li>
     </ol>
 
     <h3>自定义列表</h3>
     <dl>
-        <dt>自定义列表dl+dt+dd</dt>
-        <dd>xxxx</dd>
-        <dd>xxxx</dd>
+        <dt>自定义列表标题：dl+dt+dd</dt>
+        <dd>段落：xxxx</dd>
+        <dd>段落：xxxx</dd>
     </dl>
 
     <h3>表格</h3>
-    <table border="1">  <!-- border设置边框线条粗细 -->
+    <!-- border设置表格边框线条粗细
+         width和heigth设置表格的宽高，注意调整宽高影响总体的表格宽高（主要是表格主体单元格宽高，表格头和尾的单元格宽高不影响）
+         cellspacing设置单元格之间的间距
+         align设置单元格内文字水平方向对齐方式（left、center、right）
+         valign设置单元格内文字垂直方向对齐方式（top、middle、bottom）
+     -->
+    <table border="1" width="500" heigth="500" cellspacing="0">
         <caption>表格标题1</caption>
+
+        <!-- 表格头只能写heigth属性调整高度，当高度超过表格标签设置的高度时，表格头的高度确定，而表格的总体高度会更大一些 
+            colspan属性设置单元格水平方向占据几个单元格，rowspan属性设置单元格垂直方向占据几个单元格
+        -->
         <thead> <!-- 表格头 -->
             <tr>
                 <th></th>
@@ -115,7 +136,7 @@
                 <th>英语</th>
             </tr>
         </thead>
-        <tbody> <!-- 表格数据 -->
+        <tbody> <!-- 表格主体 -->
             <tr>
                 <th></th> <!-- tbody中的tr+th用于显示每行的表头，用于制造双表头的 -->
                 <td>红色</td>
@@ -136,18 +157,143 @@
             </tr>
         </tfoot>
     </table>
+    <hr>
 
-    <!-- form表单标签 -->
-    <!-- input输入标签，type设置各式各样的输入 -->
-    <!-- button按钮标签 -->
-    <form action="服务器的地址" class="formEvent" method="post">
-        <input type="text" class="formOninput" name="参数名称1">
-        <input type="text" class="formOnSelect" name="参数名称2">
-        <input type="text" class="formOnChange" name="参数名称3">
-        <button class="formReset">重置输入框的内容</button>
-        <button>提交表单</button>
+    <!-- form表单标签
+         action属性设置提交表单的网址url
+         method属性设置请求方法
+         target属性设置跳转方式，_blank是在新的浏览器页面打开，_self是在当前浏览器页面跳转链接打开，默认是_self
+    -->
+    <!-- label标签：包裹input输入标签控件，实现点击显示的文本与输入框关联获取焦点 -->
+    <!-- input输入标签
+         name属性设置参数的名称
+         type属性设置输入的参数类型：有如下参数类型
+            text: 单行文本输入框
+            password: 密码输入框
+            radio: 单选
+            checkbox: 多选
+            hidden：输入框隐藏
+            submit: input会变成提交按钮
+            reset: 重置按钮
+            file: 文件上传
+         placeholder属性设置输入框内的提示信息
+         value属性设置默认值，或提交到后台的值，如果是submit,reset的类型时，value就是按钮的名称。
+         checked属性设置标记单选框或者多选框的选项被默认选中
+         autofocus属性设置自动获取光标
+         color: 颜色
+         datatime: 日期时间
+         week: 周
+         month： 月
+         disabled属性设置禁用输入和修改
+         maxlength属性设置最大长度
+    -->
+    <!-- textarea多行文本输入框标签
+         name属性设置参数的名称
+         cols属性设置文本框的宽是多少字符
+         rows属性设置文本框的高是多少字符
+         disabled属性禁用输入和修改
+    -->
+    <!-- select下拉框标签
+         name属性设置参数的名称
+         disabled属性禁用下拉框全部选择
+    -->
+    <!-- option下拉框选项标签
+         value属性设置下拉框提交表单请求真实传递的参数，如果没有设置默认会获取option中的文本作为参数
+         selected属性设置下拉框默认的选择选项
+         disabled属性禁用下拉框选项选择
+    -->
+    <!-- button按钮标签
+         type属性设置按钮类型
+            submit: 默认的提交按钮
+            reset: 重置按钮
+         value: 按钮框中显示的信息
+         disabled属性禁用按钮
+    -->
+    <form action="https://www.baidu.com/s" >
+        <input type="text" name="wd">
+        <button>去百度搜索</button>
+    </form>
+    <hr>
+    <form action="https://pifa.pinduoduo.com/search" >
+        <input type="text" name="word">
+        <button>去拼多多搜索</button>
+    </form>
+    <hr>
+    <form action="xxxx"  >
+        <!-- 文本输入框 -->
+        <label>用户名称：
+            <input type="text" name="username" maxlength="8" placeholder="请输入你的用户名，长度最多是8位">
+        </label>
+        <br>
+        
+        <!-- 密码输入框 -->
+        <label>用户密码：
+            <input type="password" name="password" maxlength="8" placeholder="请输入你的密码，长度最多是8位">
+        </label>
+        <br>
+        
+        <!-- 单选框 -->
+        性别：
+        <label>
+            <input type="radio" name="gender" value="male" checked>男
+        </label>
+        <label>
+            <input type="radio" name="gender" value="female">女
+        </label>
+        <br>
+
+        <!-- 多选框 -->
+        爱好：
+        <label>
+            <input type="checkbox" name="hobby" value="basketball" checked>篮球
+        </label>
+        <label>
+            <input type="checkbox" name="hobby" value="football">足球
+        </label>
+        <label>
+            <input type="checkbox" name="hobby" value="ping pong">乒乓球
+        </label>
+        <br>
+        
+        <!-- 多行文本框： -->
+        <label>
+            其他：
+            <textarea name="other" cols="30" rows="3" placeholder="请输入你的其他信息"></textarea>
+        </label>
+        <br>
+        
+        <!-- 下拉框 -->
+        籍贯：
+        <select name="place">
+            <option value="河北省">河北</option>
+            <option value="南京市">南京</option>
+            <option value="河南省">河南</option>
+            <option value="北京省" selected>北京</option>
+        </select>
+
+        <!-- 隐藏的输入框：最终表单提交发起请求会携带这个输入框的参数 -->
+        <input type="hidden" name="abc" value="123" ><br>
+
+        <!-- 提交按钮的第一种写法：注意按钮不要写name属性，并且按钮的默认type属性是submit -->
+        <button>用户注册</button><br>
+        <!-- 提交按钮的第二种写法：注意按钮不要写name属性 -->
+        <!-- <input type="submit" value="用户注册"> -->
+
+        <!-- 重置按钮的第一种写法：注意按钮不要写name属性 -->
+        <button type="reset">重置默认值</button><br>
+        <!-- 重置按钮的第二种写法：注意按钮不要写name属性 -->
+        <!-- <input type="reset" value="重置默认值"> -->
+
+        <!-- 普通的按钮作用是绑定js事件触发对应的事件，一般这些事件都是发起请求
+             普通的按钮第一种写法：注意一定要写type属性是button，否则默认submit提交按钮
+        -->
+        <button type="button">检查账号是否已被注册</button><br>
+        <!-- 普通的按钮第二种写法：注意一定要写type属性是button，否则是默认输入框-->
+        <!-- <input type="button" value="检查账号是否已被注册"> -->
     </form>
 
+    <!-- iframe标签用来在网站中嵌入一个其他的网页（有些网站做了现在无法将它们嵌入进来），有些网站就是使用这个嵌入的广告 -->
+    <iframe src="https://www.bilibili.com/" width="100%" height="2469"></iframe>
 </body>
 
 </html>
