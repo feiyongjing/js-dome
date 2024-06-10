@@ -1,13 +1,18 @@
-
-
-
-.fontLetterSpacing{
-    letter-spacing: 20px;
+/* overflow 设置超出元素标签的内容部分如何处理，
+   hidden忽略超出的部分，另外忽略超出的部分可以解决子元素的外边距设置导致当前元素发送的移动
+   scroll使用进度条拉取展示忽略的部分
+   auto表示如果有超出的部分就显示出进度条展示忽略的部分，没有就不显示进度条
+*/
+.test1 {
+    width: 400px;
+    height: 400px;
+    background-color: yellowgreen;
+    overflow: scroll;
 }
 
-.fontWordSpacing{
-    word-spacing: 30px;
+.test2 {
+    width: 1000px;
+    background-color: burlywood;
+
+    visibility: hidden;
 }
-
-
-
