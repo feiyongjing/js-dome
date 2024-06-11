@@ -1,19 +1,29 @@
-/* overflow 设置超出元素标签的内容部分如何处理，
-   hidden忽略超出的部分，另外忽略超出的部分可以解决子元素的外边距设置导致当前元素发送的移动
-   scroll使用进度条拉取展示忽略的部分
-   auto表示如果有超出的部分就显示出进度条展示忽略的部分，没有就不显示进度条
-*/
+* {
+    margin: 0px;
+    padding: 0px;
+    height: 2500px;
+}
+
+.test {
+    height: 100px;
+    background-color:#f66daa;  
+    text-align: center;
+    line-height: 100px;
+    font-size: 60px;
+}
+
 .test1 {
-    width: 400px;
-    height: 400px;
-    background-color: yellowgreen;
-    overflow: scroll;
+    height: 100px;
+    background-color:cadetblue;
+    line-height: 100px;
+    font-size: 40px;
+    /* sticky粘性定位，当元素通过滚动条移动到距离拥有滚动条属性的元素一定距离后会之间定位在该位置，直到其他元素也通过粘性定位覆盖 */
+    position: sticky;
+    /* 粘性定位距离拥有滚动条属性元素的先边缘一定距离后会之间定位在该位置，同理 left、right、bottom也是一样 */
+    top: 0px;
 }
 
-.test2 {
-    width: 1000px;
-    background-color: burlywood;
-
-    visibility: hidden;
+span {
+    font-size: 25px;
+    background-color:palegoldenrod; 
 }
-
