@@ -1,13 +1,6 @@
+.fontLetterSpacing{letter-spacing: 20px;}
 
-
-
-.fontLetterSpacing{
-    letter-spacing: 20px;
-}
-
-.fontWordSpacing{
-    word-spacing: 30px;
-}
+.fontWordSpacing{word-spacing: 30px;}
 
 
 
