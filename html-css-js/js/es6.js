@@ -84,7 +84,7 @@ var user2 = {
     // name: name,
     name, // 如果是上面引用外面的变量就可以简写
     // age: "20",
-    [ae]: "20", // 对象的属性名引用外面的数据和上面的age: "20"是一样的效果
+    [age]: "20", // 对象的属性名引用外面的数据和上面的age: "20"是一样的效果
     // getName:function(){
     //     console.log("打印名称:",this.name);
     // }
