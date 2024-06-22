@@ -4,6 +4,7 @@
 //     this.age=age;
 // }
 
+// 原型对象设置属性
 // Person.prototype.getName(){
 //     console.log(this.name);
 // }
@@ -14,15 +15,25 @@
 // 可以通过子类的类名去调用父类的静态方法和属性
 class Person {
     
-
     static staticTest(){
         return "静态方法的设置使用java一样";
     }
 
-    // 函数可以设置参数的默认值
+    // 构造函数，并且可以设置参数的默认值
     constructor(name, age=10) {
         this.name = name;
         this.age = age;
+    }
+
+    // 读取实例对象的name属性时这个方法会被调用，例如 new Person("哈哈").name，并且返回值就是最终读取到的数据
+    get name(){
+        console.log();
+        return this.name;
+    }
+
+    // 修改实例对象的name属性时这个方法会被调用，例如 new Person("哈哈").name="abc"
+    set name(name){
+        this.name = name;
     }
 
     toString() {
