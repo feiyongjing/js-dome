@@ -18,26 +18,13 @@
 
 <body>
     <style>
-        .dom {
-            width: 200px;
-            height: 200px;
-            background-color: palegreen;
-        }
+
     </style>
 
     <div id="root">
-        <!-- 元素内容可以通过{{}}包裹Vue对象data中的属性双向绑定或者js表达式 -->
-        <h1 >hello, {{name}}</h1>
-
-        <!-- 元素的属性可以通过v-bind绑定属性值是Vue对象data中的属性或者js表达式，v-bind:可以简写为: -->
-        <a v-bind:href="url">去百度</a>
-        <!-- 注意v-bind是单向数据绑定，即data中的属性值发生变化影响元素属性值，元素属性值发生变化不影响data中的属性值 -->
-        <input type="text" placeholder="单向数据绑定" v-bind:value="bind_test1" >
-        <!-- v-model可以实现元素属性值和data中的属性值双向绑定
-             但是v-model只能应用在表单类的元素上并且默认就是绑定的value属性值 
-             所以v-model:value可以直接简写为 v-model
-        -->
-        <input type="text" placeholder="双向数据绑定" v-model:value="bind_test2" >
+        <!-- 注意这里的{opacity}是简写，原来的css应该是{opacity:1}，由于与vm中的属性名称一致所有可以简写 -->
+        <h3 :style="{opacity}">欢迎学习Vue</h3>
+        <button @click="stop">点我停止变化</button>
     </div>
 
 
@@ -45,20 +32,87 @@
     <script type="text/javascript">
         Vue.config.productionTip = false
 
-        // 常见vue对象
-        var v=new Vue({
-            // el属性是css选择器，只能选择绑定一个元素，不能绑定多个元素（当出现多个元素时只有第一个元素绑定成功）
-            // 其实也可以在vue对象创建出来之后使用vue对象调用 $mount("#root")方法来指定 el 属性
-            el: "#root",     
+        let v = new Vue({
+            el: "#root",
+            data: {
+                opacity: 1,
 
-            // data提供el绑定元素的数据，包含它的后代元素
-            // 其实dat也可以是一个函数，依靠该返回值靠提供数据（注意不要写箭头函数，这样它就不是vue对象的函数了）
-            data: {          
-                name: "张三",
-                url: "https://www.baidu.com",
-                bind_test1: "",
-                bind_test2: ""
-            }
+            },
+
+
+            methods: {
+                stop() {
+                    // 调用Vm的该方法vm就会自杀
+                    this.$destroy()
+                }
+            },
+
+            // 数据代理还未开始，无法通过Vm获取data中的数据，methods中的方法
+            beforeCreate() {
+                // console.log("beforeCreate")
+                // console.log(this)
+                // 卡断点
+                // debugger
+            },
+
+            // 数据监测和数据代理之后，可以通过Vm获取data中的数据，methods中的方法
+            created() {
+                // console.log("created")
+                // console.log(this)
+                // 卡断点
+                // debugger
+            },
+
+            // 已经生成了虚拟DOM，但是在beforeMount中对DOM的操作都是操作的真实DOM但是这个真实DOM最终会被内存中的虚拟DOM覆盖导致不生效
+            beforeMount() {
+                // console.log("beforeMount")
+                // console.log(this)
+                // 卡断点
+                // debugger
+            },
+
+            // 常用的生命周期：Vue完成模板的解析并把初始的真实DOM元素放入页面后（挂载完毕）调用mounted，此时操作的真实DOM是生效的
+            mounted() {
+                setInterval(() => {
+                    this.opacity -= 0.01
+                    if (this.opacity <= 0) this.opacity = 1
+                })
+            },
+
+            // 数据发生更新时调用，但是此时数据是新的，但是页面上的数据还是是旧的
+            beforeUpdate() {
+                // console.log("beforeUpdate")
+                // console.log(this)
+                // 卡断点
+                // debugger
+            },
+
+            // 数据更新完成后调用，但是此时数据和页面上的数据都是新的
+            updated() {
+                // console.log("updated")
+                // console.log(this)
+                // 卡断点
+                // debugger
+            },
+
+            // 常用的生命周期：当Vm调用vm.$destroy()后会调用beforeDestroy，此时vm的data、methods都是可用的，
+            // 一般在此阶段关闭定时器、取消订阅消息、解绑自定义事件等收尾操作
+            // 在beforeDestroy调用vm的data、methods修改数据是生效的，
+            // 但是由于已经进入销毁流程了，之后不会调用beforeUpdate、updated、mounted所以数据不会同步到页面了
+            beforeDestroy() {
+                // console.log("beforeDestroy")
+                // console.log(this)
+                clearInterval(this.timer)
+                // 卡断点
+                // debugger
+            },
+
+            // vm销毁完毕后调用destroyed
+            destroyed() {
+                console.log("destroyed")
+                // 卡断点
+                // debugger
+            },
         })
     </script>
 
