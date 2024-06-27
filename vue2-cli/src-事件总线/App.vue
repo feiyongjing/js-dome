@@ -19,14 +19,6 @@ export default {
     Student,
     Teacher,
   },
-  data() {
-    return {};
-  },
-
-  methods: {
-
-  },
-
 };
 </script>
 

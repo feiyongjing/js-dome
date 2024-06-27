@@ -28,7 +28,7 @@ export default {
   methods:{
     add(){
         const personObj={id:Date.now(),name:this.name}
-        // 注意如果使用的是模块化的store，第一参数通过 模块名称/函数名称 获取对应模块化store的Mutations
+        // 注意如果使用的是模块化的store，第一参数通过 模块名称/函数名称 调用对应store模块化Mutations中的函数
         this.$store.commit("personAbout/addPerson",personObj)
         this.name=""
     },

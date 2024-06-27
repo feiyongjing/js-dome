@@ -16,9 +16,6 @@ export default {
     Count,
     Person,
   },
-  data() {
-    return {};
-  },
   mounted() {
     console.log(this);
   },
