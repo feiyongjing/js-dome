@@ -4,40 +4,33 @@ import VueRouter from 'vue-router'
 // 引入路由需要的路由组件，路由组件一般放在pages目录中，而一般组件放在components目录中
 import About from '../pages/About'
 import Home from '../pages/Home'
-import Message from '../pages/Message'
-import News from '../pages/News'
-import Detail from '../pages/Detail'
 
 
 // 创建并暴露一个路由器
-export default new VueRouter({
+const router = new VueRouter({
     // 设置不同路径路由到不同的组件
     routes: [
         {
+            name: 'about',
             path: "/about",
-            component: About
+            component: About,
+            // meta是用于配置一些元数据，通常这些元数据会在路由守卫中使用
+            meta: {
+                title: "关于",   // 目前是在路由守卫中获取title数据替换跳转路由的页签
+                isAuth: true,   // 目前是在路由守卫中判断isAuth来确认是否有权限切换到该路由
+            },
         },
         {
+            name: 'home',
             path: "/home",
             component: Home,
-            // 设置子路由，路由到不同的组件
-            children: [
-                {
-                    path: "message",   // 注意子路由是不需要添加/前缀
-                    component: Message,
-                    children: [
-                        {
-                            name: 'detail',   // 给路由命名后在to的对象写法中可以使用name简化过长的path
-                            path: "detail",   // 注意子路由是不需要添加/前缀
-                            component: Detail,
-                        }
-                    ]
-                },
-                {
-                    path: "news",
-                    component: News
-                }
-            ]
+            // meta是用于配置一些元数据，通常这些元数据会在路由守卫中使用
+            meta: {
+                title: "首页",   // 目前是在路由守卫中获取title数据替换跳转路由的页签
+                isAuth: false,   // 目前是在路由守卫中判断isAuth来确认是否有权限切换到该路由
+            },
         }
     ]
 })
+
+export default router 

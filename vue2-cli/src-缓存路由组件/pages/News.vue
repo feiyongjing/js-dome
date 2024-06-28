@@ -17,6 +17,7 @@ export default {
   beforeDestroy() {
     console.log("News组件即将被销毁了！");
   },
+
 };
 </script>
 
