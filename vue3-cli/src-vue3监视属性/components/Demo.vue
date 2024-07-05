@@ -85,7 +85,7 @@ export default {
     // 直接写监视的回调函数，回调函数中用到的属性都会监视，即当回调函数中使用的属性变化时回调函数就会执行
     watchEffect(()=>{
       const x1= sum.value
-      const x2=person.job.j1.salary
+      const x2= person.job.j1.salary
       console.log("watchEffect所指定的回调执行了")
     })
 

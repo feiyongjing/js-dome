@@ -17,16 +17,16 @@
 
 <script>
 // 如果数据需要响应式的变化，即数据只要发生变化那么模板的数据也随之变化
-// 引入ref函数和reactive实现响应式
+// 引入ref函数和reactive函数实现响应式
 
-// ref函数可以让基本类型数据和对象类型数据都做到响应式，但是其实ref对对象类型数据的操作还是借助的reactive
+// ref函数可以让基本类型数据和对象类型数据都做到响应式，但是其实ref函数对对象类型数据的操作还是借助的reactive函数
 // ref使用如下，ref的缺点是获取数据必须通过 .value 获取，并且在setup的返回值中大量声明数据名称
 // 基本类型数据定义  let name = ref("张三");
 // 获取基本类型数据  name.value
 // 对象类型数据定义  let job = ref({type:'前端工程师',salary:'30k'})
 // 获取对象类型数据  job.value.type
 
-// reactive只能让对象类型数据做到响应式
+// reactive函数只能让对象类型数据做到响应式
 // 数据定义  let job = reactive({type:'前端工程师',salary:'30k'})
 // 获取数据  job.type
 
@@ -39,9 +39,8 @@ export default {
   components: {},
 
   // vue2中的data、methods、等都写在setup中
-  // setup不能被async修饰，因为返回值不再是return的对象，而是promise对象，模板看不到return对象中的属性了
   setup() {
-    // 直接定义变量数据
+    // 直接定义对象类型变量数据
     let person = reactive({
       name: "张三",
       age: "18",

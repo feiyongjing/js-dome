@@ -4,7 +4,7 @@
 </template>
 
 <script>
-// 在setup在使用组合式API写生命周期，
+// 在setup在使用组合式API写生命周期
 import {
   ref,
   onBeforeMount,

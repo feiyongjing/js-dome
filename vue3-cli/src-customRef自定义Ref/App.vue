@@ -12,6 +12,7 @@ export default {
 
   setup() {
     // 自定义一个ref名为：myRef
+    // 修改数据会延迟一秒生效
     function myRef(value,delay) {
       let timer
       
