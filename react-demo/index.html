@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello World</title>
+    <!-- react.development.js 是react的核心库 -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <!-- react-dom.development.js 是提供操作DOM的react库 -->
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <!-- babel.min.js 解析jsx语法代码转为js -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style>
+        .title {
+            background-color: aqua;
+        }
+    </style>
+  </head>
+  <body>
+
+    <div id="root"></div>
+    
+    <!-- 注意这里的script标签type属性是text/babel，而不是text/javascript -->
+    <script type="text/babel">
+
+      const myId="test"
+      const myData="Hello, world!"
+    
+      function MyApp() {
+        // jsx语法规则
+        // 1. 编写虚拟DOM的html时不需要引号包裹标签，使用括号包裹可以写多行html
+        // 2. 标签混入标签属性和标签内容需要使用变量时，变量需要使用花括号{}包裹变量
+        // 3. 标签中指定样式的类名不使用class属性表示，而是使用className属性表示
+        // 4. 标签内部的style属性不能像正常的
+        return (
+            <h1 id={myId} className='title'>
+                <span>
+                    {myData}
+                </span>
+            </h1>
+        );
+      }
+
+      const container = document.getElementById('root');
+      const root = ReactDOM.createRoot(container);
+      root.render(<MyApp />);
+
+    </script>
+  </body>
+</html>
