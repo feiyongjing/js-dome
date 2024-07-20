@@ -16,10 +16,6 @@
   <!-- <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script> -->
   <script src="./js/react18/babel.min.js"></script>
 
-  <!-- prop-types.js 是MyApp组件标签上传递属性到组件实例对象props属性上时的类型检查限制需要使用的库 -->
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/prop-types/15.6.0/prop-types.js"></script> -->
-  <script src="./js/react18/prop-types.js"></script>
-
   <style>
     .title {
       font-size: 30px;
@@ -30,49 +26,35 @@
 
 <body>
   <div id="test1"></div>
-  <div id="test2"></div>
-  <div id="test3"></div>
 
   <script type="text/babel">
     class MyApp extends React.Component {
 
-      // 现在MyApp组件标签上传递属性到组件实例对象props属性上时的类型检查限制
-      static propTypes = {
-        name: PropTypes.string.isRequired,  // name属性必须是字符串并且是必传选项
-        age: PropTypes.number,
-        sex: PropTypes.string,
-        speak: PropTypes.func, // speak属性必须是函数类型
+      myRef1=React.createRef();
+
+      showDate1 = ()=>{
+        // 通过ref容器的current属性获取DOM标签
+        alert(this.myRef1.current.value)
       }
 
-      // 设置MyApp组件标签上传递属性到组件实例对象props属性上时没有传递属性时设置该属性的默认值
-      static defaultProps = {
-        age: 19,
-        sex: '男'
+      showDate2 = (event)=>{
+        // 通过event.target获取发生事件的DOM标签
+        alert(event.target.value)
       }
-
 
       render() {
-        // 读取通过在组件对象上的props属性
-        const { name, age, sex } = this.props
         return (
           <div className='title'>
-            <h3>姓名：{name}</h3>
-            <h3>年龄：{age}</h3>
-            <h3>性别：{sex}</h3>
+              <input ref={this.myRef1} type="text" placeholder="点击按钮弹窗提示数据"/>
+              <button onClick={this.showDate1} >点击提示左侧数据</button>
+              <input onBlur={this.showDate2} type="text" placeholder="失去焦点弹窗提示数据"/>
           </div>
         )
       };
 
     }
 
-    // 设置自定义的标签属性，最终这些属性会存储在组件对象的props属性上
-    ReactDOM.render(<MyApp name='张三' age={15} sex='男' />, document.getElementById('test1'));
-
-    const user2 = { name: '李四', age: 20, sex: '男' }
-    ReactDOM.render(<MyApp {...user2} />, document.getElementById('test2'));
-
-    const user3 = { ...user2, name: '王舞', sex: '女' }
-    ReactDOM.render(<MyApp {...user3} />, document.getElementById('test3'));
+    ReactDOM.render(<MyApp />, document.getElementById('test1'));
   </script>
 </body>
 
