@@ -25,36 +25,53 @@
 </head>
 
 <body>
-  <div id="test1"></div>
+  <div id="test"></div>
 
   <script type="text/babel">
     class MyApp extends React.Component {
 
-      myRef1=React.createRef();
-
-      showDate1 = ()=>{
-        // 通过ref容器的current属性获取DOM标签
-        alert(this.myRef1.current.value)
+      state = {
+        opacity: 1
       }
 
-      showDate2 = (event)=>{
-        // 通过event.target获取发生事件的DOM标签
-        alert(event.target.value)
+      death = (event) => {
+        // 卸载组件
+        ReactDOM.unmountComponentAtNode(document.getElementById('test'))
       }
 
+      // 组件挂载完毕时的生命周期钩子函数
+      componentDidMount(){
+        console.log('组件挂载完毕时创建定时器')
+        this.timer = setInterval(()=>{
+          let opacity = this.state.opacity
+          opacity -= 0.1
+          if (opacity <= 0) opacity = 1
+          console.log('透明度发生变化')
+          // 设置新的透明度
+          this.setState({opacity})
+        })
+      }
+
+      // 组件即将解除时的挂载生命周期钩子函数
+      componentWillUnmount(){
+        console.log('组件即将解除时取消定时器')
+        // 取消定时器
+        clearInterval(this.timer)
+      }
+
+      // render调用时机：初始化渲染会调用、状态（state数据）更新之后也会调用
       render() {
         return (
           <div className='title'>
-              <input ref={this.myRef1} type="text" placeholder="点击按钮弹窗提示数据"/>
-              <button onClick={this.showDate1} >点击提示左侧数据</button>
-              <input onBlur={this.showDate2} type="text" placeholder="失去焦点弹窗提示数据"/>
+            <h2 style={{opacity: this.state.opacity}}>React学不会怎么办？</h2>
+            <button onClick={this.death}>手动解除组件挂载</button>
           </div>
         )
       };
 
     }
 
-    ReactDOM.render(<MyApp />, document.getElementById('test1'));
+    ReactDOM.render(<MyApp />, document.getElementById('test'));
   </script>
 </body>
 
