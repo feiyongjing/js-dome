@@ -16,10 +16,6 @@
   <!-- <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script> -->
   <script src="./js/react18/babel.min.js"></script>
 
-  <!-- prop-types.js 是MyApp组件标签上传递属性到组件实例对象props属性上时的类型检查限制需要使用的库 -->
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/prop-types/15.6.0/prop-types.js"></script> -->
-  <script src="./js/react18/prop-types.js"></script>
-
   <style>
     .title {
       font-size: 30px;
@@ -29,50 +25,53 @@
 </head>
 
 <body>
-  <div id="test1"></div>
-  <div id="test2"></div>
-  <div id="test3"></div>
+  <div id="test"></div>
 
   <script type="text/babel">
     class MyApp extends React.Component {
 
-      // 现在MyApp组件标签上传递属性到组件实例对象props属性上时的类型检查限制
-      static propTypes = {
-        name: PropTypes.string.isRequired,  // name属性必须是字符串并且是必传选项
-        age: PropTypes.number,
-        sex: PropTypes.string,
-        speak: PropTypes.func, // speak属性必须是函数类型
+      state = {
+        opacity: 1
       }
 
-      // 设置MyApp组件标签上传递属性到组件实例对象props属性上时没有传递属性时设置该属性的默认值
-      static defaultProps = {
-        age: 19,
-        sex: '男'
+      death = (event) => {
+        // 卸载组件
+        ReactDOM.unmountComponentAtNode(document.getElementById('test'))
       }
 
+      // 组件挂载完毕时的生命周期钩子函数
+      componentDidMount(){
+        console.log('组件挂载完毕时创建定时器')
+        this.timer = setInterval(()=>{
+          let opacity = this.state.opacity
+          opacity -= 0.1
+          if (opacity <= 0) opacity = 1
+          console.log('透明度发生变化')
+          // 设置新的透明度
+          this.setState({opacity})
+        })
+      }
 
+      // 组件即将解除时的挂载生命周期钩子函数
+      componentWillUnmount(){
+        console.log('组件即将解除时取消定时器')
+        // 取消定时器
+        clearInterval(this.timer)
+      }
+
+      // render调用时机：初始化渲染会调用、状态（state数据）更新之后也会调用
       render() {
-        // 读取通过在组件对象上的props属性
-        const { name, age, sex } = this.props
         return (
           <div className='title'>
-            <h3>姓名：{name}</h3>
-            <h3>年龄：{age}</h3>
-            <h3>性别：{sex}</h3>
+            <h2 style={{opacity: this.state.opacity}}>React学不会怎么办？</h2>
+            <button onClick={this.death}>手动解除组件挂载</button>
           </div>
         )
       };
 
     }
 
-    // 设置自定义的标签属性，最终这些属性会存储在组件对象的props属性上
-    ReactDOM.render(<MyApp name='张三' age={15} sex='男' />, document.getElementById('test1'));
-
-    const user2 = { name: '李四', age: 20, sex: '男' }
-    ReactDOM.render(<MyApp {...user2} />, document.getElementById('test2'));
-
-    const user3 = { ...user2, name: '王舞', sex: '女' }
-    ReactDOM.render(<MyApp {...user3} />, document.getElementById('test3'));
+    ReactDOM.render(<MyApp />, document.getElementById('test'));
   </script>
 </body>
 
