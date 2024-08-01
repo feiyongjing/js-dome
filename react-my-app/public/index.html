@@ -2,42 +2,35 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <!-- 引入页签图标, %PUBLIC_URL%代表public文件夹路径-->
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+
+    <!-- 开启理想视口,用于做移动端网页的适配 -->
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- 用于配置浏览器页签和地址栏的颜色(仅支持安卓手机浏览器) -->
     <meta name="theme-color" content="#000000" />
+
+    <!-- 描述网站的元信息 -->
     <meta
       name="description"
       content="Web site created using create-react-app"
     />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
+    <!-- 设置网页添加到手机屏幕后的图标(仅支持苹果手机) -->
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+
+    <!-- 引用加壳配置文件,即项目外套个壳变成安卓app应用或者是IOS的app应用
+         配置文件中主要写一些app的名称、图标、需要访问手机的权限（相册、麦克风、摄像头）等
+     -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <title>React App</title>
   </head>
   <body>
+    <!-- 浏览器不支持JavaScript就显示这句话 -->
     <noscript>You need to enable JavaScript to run this app.</noscript>
+
+    <!-- 组件容器 -->
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
   </body>
 </html>
