@@ -1,0 +1,20 @@
+.box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.item_container {
+  display: flex;
+  justify-content: space-between;
+  border: 3px solid black;
+  width: 500px;
+}
+
+.left_content{
+  align-content: center;
+}
+
+.btn_danger {
+  color: red;
+}

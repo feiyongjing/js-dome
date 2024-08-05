@@ -31,7 +31,17 @@
     class MyApp extends React.Component {
 
       state = {
-        opacity: 1
+        n: 0
+      }
+
+      add = () => {
+        const n = this.state.n + 1
+        this.setState({ n })
+      }
+
+      force = () => {
+        // 调用forceUpdate()函数可以绕开 shouldComponentUpdate钩子函数控制组件更新阀门，从而进行强制组件更新
+        this.forceUpdate()
       }
 
       death = (event) => {
@@ -39,35 +49,65 @@
         ReactDOM.unmountComponentAtNode(document.getElementById('test'))
       }
 
-      // 组件挂载完毕时的生命周期钩子函数
-      componentDidMount(){
-        console.log('组件挂载完毕时创建定时器')
-        this.timer = setInterval(()=>{
-          let opacity = this.state.opacity
-          opacity -= 0.1
-          if (opacity <= 0) opacity = 1
-          console.log('透明度发生变化')
-          // 设置新的透明度
-          this.setState({opacity})
-        })
+      // getDerivedStateFormProps钩子函数在初始化挂载和更新组件之前会被调用
+      // 但是它必须写为static静态的，并且返回一个对象或者是null
+      // 返回值会被当成组件的state，并且是不可更改的
+      // 并且还可以接收两个参数，第一个是组件的props，第二个参数是组件原始的state
+      // getDerivedStateFormProps钩子函数的使用场景及其少见，即使符合使用场景也基本不使用，原因是使用复杂使代码难以维护，肯定有其他方式比它简单
+      // static getDerivedStateFormProps(props, state){
+      //   console.log("getDerivedStateFormProps钩子函数固定state数据")
+      //   return {n: 108}
+      // }
+
+      // componentDidMount函数是组件初始化挂载完毕时的生命周期钩子函数，一般可以用于创建定时器等资源
+      componentDidMount() {
+        console.log('组件挂载完毕时的生命周期钩子函数执行')
       }
 
-      // 组件即将解除时的挂载生命周期钩子函数
-      componentWillUnmount(){
-        console.log('组件即将解除时取消定时器')
-        // 取消定时器
-        clearInterval(this.timer)
-      }
-
-      // render调用时机：初始化渲染会调用、状态（state数据）更新之后也会调用
+      // render函数是进行组件挂载，它的调用时机：初始化渲染会调用、状态（state数据）更新之后也会调用
       render() {
+        console.log('组件挂载执行')
         return (
           <div className='title'>
-            <h2 style={{opacity: this.state.opacity}}>React学不会怎么办？</h2>
-            <button onClick={this.death}>手动解除组件挂载</button>
+            <h2>n={this.state.n}</h2>
+            <button onClick={this.add}>点我加1</button>
+            <button onClick={this.force}>不修改数据，强制更新组件</button>
+            <button onClick={this.death}>点我卸载组件</button>
           </div>
         )
       };
+
+      // componentWillUnmount函数是组件即将解除时的挂载生命周期钩子函数，可以用于销毁一些资源
+      componentWillUnmount() {
+        console.log('组件即将解除时的挂载生命周期钩子函数执行')
+      }
+
+      // shouldComponentUpdate函数是组件更新是否需要重新挂载组件的生命周期钩子函数
+      // 这个钩子函数是用于控制组件是否更新的'阀门'，如果返回值是false表示不会进行接下来的重新挂载，默认返回是true
+      // 在调用this.setState()函数修改数据之后该钩子函数会执行，即setState函数是正常更新
+      // 注意调用this.forceUpdate()函数可以绕开 shouldComponentUpdate钩子函数控制组件更新阀门，从而进行强制组件更新
+      shouldComponentUpdate() {
+        console.log('组件更新是否需要重新挂载组件的生命周期钩子函数执行')
+        return true
+      }
+
+
+      // getSnapshotBeforeUpdate函数是组件更新重新挂载完毕后的预处理的生命周期钩子函数
+      // 必须有返回值，返回值作为componentDidUpdate钩子函数的第三个参数进行传递
+      // getSnapshotBeforeUpdate函数使用场景也是极其罕见，原因是准备返回的数据可以直接在componentDidUpdate钩子函数中手动获取
+      getSnapshotBeforeUpdate() {
+        console.log('组件更新重新挂载完毕后的预处理的生命周期钩子函数')
+        return "哈哈"
+      }
+
+      // componentDidUpdate函数是组件更新重新挂载完毕时的生命周期钩子函数
+      // 接收3个参数
+      // 第一个参数oldProps是组件更新之前旧的props
+      // 第二个参数oldState是组件更新之前旧的state
+      // 第三个参数snapshotValue是钩子函数的返回值
+      componentDidUpdate(oldProps, oldState, snapshotValue) {
+        console.log('组件更新重新挂载完毕时的生命周期钩子函数执行', oldProps, oldState, snapshotValue)
+      }
 
     }
 
