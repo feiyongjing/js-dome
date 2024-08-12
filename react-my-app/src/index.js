@@ -3,23 +3,27 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter } from 'react-router-dom';  // BrowserRouter 和 HashRouter 都是路由器
+import store from './redux/store' // 自己创建的redux核心对象store
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-// 必须确保所有的路由组件都被同一个路由器管理，否则路由链接不生效，所以只能使用一个路由器标签包裹App组件来管理所有的路由
-// BrowserRouter 和 HashRouter 路由器的区别
-// HashRouter路由器会在域名后的路径添加/#/ 会将/#/后面的路径当成路由路径去获取前端资源
-// BrowserRouter路由器不会在域名后的路径添加/#/ 注意路由的路径页面刷新后直接拿着这个路径去获取后端资源而不是前端资源导致报错
-// BrowserRouter路由器的解决方案是通过nginx配置路由转发来区分前端路由和后端路由进行代理转发
-// 一般如果前后端API都是同一个域名是使用的 BrowserRouter 路由器
+
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <App />
   </React.StrictMode>
 );
 
+// 监听redux下store中的数据方式二
+// 由于每个组件都设置componentDidMount生命周期手动订阅redux下store中的数据修改并且设置回调重新进行渲染页面比较麻烦
+// 所以直接在App组件上进行监听redux下store中的数据并且重新渲染App组件，这样会同时渲染App下的所有组件
+// 至于渲染App和下面的所有组件的效率问题则是交给React的Diff算法来决定局部刷新
+store.subscribe(() => {
+  root.render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  );
+})
 
 reportWebVitals();
