@@ -25,6 +25,9 @@ store.subscribe(() => {
     </React.StrictMode>
   );
 })
+<<<<<<< HEAD
 
+=======
+>>>>>>> d25147137388bd66e4c5dc65a36688e461b30f41
 
 reportWebVitals();

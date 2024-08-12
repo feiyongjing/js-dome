@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 // 自己创建的redux核心对象store
+<<<<<<< HEAD
 import store from '../../redux/store' 
 
 // 引入自定义的action对象构建函数
@@ -23,24 +24,50 @@ export default class Count extends Component {
         const value = this.selectNumber.value * 1
         // store的dispatch函数修改数据，参数是action对象（包含操作类型和传递的数据）
         store.dispatch(createIncrementAction(value))
+=======
+// import store from '../../redux/store' 
+
+// 引入自定义的action对象构建函数
+// import {createIncrementAction, createDecrementAction, createIncrementAsyncAction} from '../../redux/count/create_count_action'
+
+export default class Count extends Component {
+
+    increment = () => {
+        const value = this.selectNumber.value * 1
+        // store的dispatch函数修改数据，参数是action对象（包含操作类型和传递的数据）
+        // store.dispatch(createIncrementAction(value))
+>>>>>>> d25147137388bd66e4c5dc65a36688e461b30f41
     }
 
     decrement = () => {
         const value = this.selectNumber.value * 1
+<<<<<<< HEAD
         store.dispatch(createDecrementAction(value))
+=======
+        // store.dispatch(createDecrementAction(value))
+>>>>>>> d25147137388bd66e4c5dc65a36688e461b30f41
     }
 
     incrementIfOdd = () => {
         // store的getState函数获取数据
+<<<<<<< HEAD
         if (store.getState() % 2 === 0) {
             return
         }
         const value = this.selectNumber.value * 1
         store.dispatch(createIncrementAction(value))
+=======
+        // if (store.getState() % 2 === 0) {
+        //     return
+        // }
+        const value = this.selectNumber.value * 1
+        // store.dispatch(createIncrementAction(value))
+>>>>>>> d25147137388bd66e4c5dc65a36688e461b30f41
     }
 
     incrementAsync = () => {
         const value = this.selectNumber.value * 1
+<<<<<<< HEAD
         setTimeout(() => {
             store.dispatch(createIncrementAction(value))
         }, 1000)
@@ -52,6 +79,18 @@ export default class Count extends Component {
         return (
             <div>
                 <h1>当前值是{store.getState()}</h1>
+=======
+        // setTimeout(() => {
+            // store.dispatch(createIncrementAsyncAction(value, 1000))
+        // }, 1000)
+
+    }
+
+    render() {
+        return (
+            <div>
+                <h1>当前值是{"???"}</h1>
+>>>>>>> d25147137388bd66e4c5dc65a36688e461b30f41
                 <select ref={c => this.selectNumber = c}>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -64,4 +103,8 @@ export default class Count extends Component {
             </div>
         )
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> d25147137388bd66e4c5dc65a36688e461b30f41
