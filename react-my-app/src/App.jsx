@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
-import CountContainer from './containers/Count/Count'
-import PersonContainer from './containers/Person/Person'
+import './App.css';
+
+import Count from './components/Count/Count'
+
+
 
 export default class App extends Component {
 
   render() {
-
     return (
-      <div>
-        <CountContainer />
-        <hr/>
-        <PersonContainer />
+      <div id='app'>
+        <Count />
       </div>
     )
   }
