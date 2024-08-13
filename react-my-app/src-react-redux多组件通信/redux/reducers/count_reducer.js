@@ -1,4 +1,4 @@
-import {INCREMENT, DECREMENT} from './create_count_action' // 引入自定义的action操作常量
+import {INCREMENT, DECREMENT} from '../actions/create_count_action' // 引入自定义的action操作常量
 
 /**
  * reducer 进行实际的数据修改

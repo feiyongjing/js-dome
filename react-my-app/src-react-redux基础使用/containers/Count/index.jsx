@@ -11,7 +11,7 @@ import CountUI from '../../components/Count/Count'
 // 返回值作为向UI组件（CountUI）传递的 props 数据
 function mapStateToProps(state) {
     return {
-        count: state
+        count: state.count
     }
 }
 

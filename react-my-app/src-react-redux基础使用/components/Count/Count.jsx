@@ -24,7 +24,7 @@ export default class Count extends Component {
     }
 
     incrementIfOdd = () => {
-        // store的getState函数获取数据
+        // 从props中获取容器组件传递的redux存储数据（可以获取当前组件或者其他组件存储在redux中的数据）
         if (this.props.count % 2 === 0) {
             return
         }
