@@ -5,7 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, HashRouter } from 'react-router-dom';  // BrowserRouter 和 HashRouter 都是路由器
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+export const root = ReactDOM.createRoot(document.getElementById('root'));
 
 // 必须确保所有的路由组件都被同一个路由器管理，否则路由链接不生效，所以只能使用一个路由器标签包裹App组件来管理所有的路由
 // BrowserRouter 和 HashRouter 路由器的区别
