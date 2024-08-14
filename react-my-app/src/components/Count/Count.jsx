@@ -1,81 +1,61 @@
-import React, { Component, createContext } from 'react'
+import React, { Component, PureComponent } from 'react'
 
-// 通过createContext 创建context来存储数据，当然也可以传递参数对象表示初始化存储的数据
-const UserContext = createContext({})
 
-export default class A extends Component {
+export default class A extends PureComponent {
 
 
     state = { name: "张三", age: 18 }
 
-    updateName = (name) => {
-        this.setState({ name })
+    updateName = () => {
+        this.setState({name: this.inputNode.value})
     }
 
     render() {
+        // 开发环境下 React.StrictMode 包裹App组件进行检查会导致reder和一些生命周期在组件渲染和更新都会被调用两次，来帮助我们发现副作用错误
+        console.log('A组件进行render渲染')  
         const { name, age } = this.state
         return (
             <>
                 <div>A组件</div>
                 <div>A组件中的用户名称是：{name}，年龄是：{age}</div>
+                <input type='text' ref={c => this.inputNode = c} placeholder='请输入新的用户名称' />
+                <button onClick={this.updateName}>点我修改用户名称</button>
                 <hr />
-                {/* 通过 xxxContext.Consumer 标签包裹组件，并且设置value来向后代组件传递需要的数据 */}
-                <UserContext.Provider value={{ ...this.state, updateName: this.updateName }}>
-                    <B />
-                </UserContext.Provider>
-
+                <B userObj={{name, age}}/>
             </>
         )
     }
+
+    // 方式一
+    // 通过shouldComponentUpdate判断state和props是否被修改，如果没有修改就返回false不调用reand重新渲染组件
+    // 缺点是每个组件都需要写shouldComponentUpdate这个生命周期钩子函数，并且state和props中的数据多时进行比较非常麻烦
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     console.log("旧的state",this.state)
+    //     console.log("新的state",nextState)
+    //     console.log("旧的props",this.props)
+    //     console.log("新的props",nextProps)
+
+    //     console.log(this.state.name!==nextState.name)
+    //     return this.state.name!==nextState.name
+    //   }
 }
 
-class B extends Component {
+
+// 方式二：组件继承PureComponent，而不是原来的Component
+// 这样会直接默认重写shouldComponentUpdate生命周期钩子函数，默认比较state和props它们是否是新的对象（比较新旧state和props的地址）
+// 即必须是新的对象才会修改数据进行页面的渲染，如果只是修改旧的对象内部数据是不生效的
+// 所以一般都是编写 this.setState({name: 'xxx'}) 这样创建新的对象进行修改数据
+class B extends PureComponent {
+
     render() {
+        console.log('B组件进行render渲染')
+        const {name, age} = this.props.userObj
+
         return (
             <>
                 <div>B组件</div>
-                <hr />
-                <C />
-            </>
-
-        )
-    }
-}
-
-class C extends Component {
-
-    // 方式一：设置 static contextType 的属性是从哪个Context获取数据
-    // 然后就可以直接通过从 this.context 获取Context中的数据，由于使用了this，所以只有类组件可以使用这种方式
-    static contextType = UserContext
-
-    render() {
-
-        return (
-
-            // <>
-            //     <div>C组件</div>
-            //     <div>C组件获取A组件用户名称：{this.context.name}</div>
-            //     <input type='text' ref={c => this.inputNode = c} placeholder='请输入新的用户名称' />
-            //     <button onClick={() => this.context.updateName(this.inputNode.value)}>点我修改用户名称</button>
-            // </>
-
-            // 方式二：直接使用 xxxContext.Consumer 标签包裹内容，在内容中可以通过 value 获取Context中的数据
-            // 这种方式函数式组件和类组件都可以使用，但是就是写起来有些麻烦
-            <>
-                <div>C组件</div>
-                <div>C组件获取A组件用户名称：
-                    <UserContext.Consumer>
-                        {
-                            value => (
-                                <>
-                                    {value.name}，年龄是：{value.age}
-                                    <input type='text' ref={c => this.inputNode = c} placeholder='请输入新的用户名称' />
-                                    <button onClick={() => value.updateName(this.inputNode.value)}>点我修改用户名称</button>
-                                </>
-                            )
-                        }
-                    </UserContext.Consumer>
-                </div>
+                <div>B组件获取A组件用户名称：{name}，年龄是：{age}</div>
+                
             </>
         )
     }
