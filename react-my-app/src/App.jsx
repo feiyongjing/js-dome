@@ -1,72 +1,123 @@
-import React from 'react';
-import { NavLink, Link, Route, Routes, Navigate, useRoutes } from 'react-router-dom';
+import React, { useState } from 'react';
+import { NavLink, useNavigate, useRoutes } from 'react-router-dom';
 import './App.css';
 
-import About from './pages/About/About'
-import Home from './pages/Home/Home'
+import Message from './pages/Message/Message'
 
 export default function App() {
 
+  // 通过 useNavigate 函数返回的 navigate对象来进行编程式的路由导航
+  // 使用 useNavigate 就无需再像route5那样对一般组件使用withRouter加工组件成为路由组件
+  const navigate = useNavigate()
+
+  const [messageArr, setMessageArr] = useState(
+    [
+      { id: "001", title: "消息1", content: "消息1内容" },
+      { id: "002", title: "消息2", content: "消息2内容" },
+      { id: "003", title: "消息3", content: "消息3内容" },
+    ]
+  )
+
 
   const computedClassname = ({ isActive }) => {
-    console.log("是否匹配当前路径", isActive)
+    // console.log("是否匹配当前路径", isActive)
     return isActive ? "aaa" : "bbb"
+  }
+
+  // 带历史记录的跳转，如果需要传递params或者query参数就手动拼接到路由路径中
+  const pushShow = (id, title, content) => {
+    
+    navigate(`/message`, {
+      replace: false,
+      state: {
+        id, title, content
+      }
+    })
+
+  }
+
+  // 不带历史记录的跳转
+  const replaceShow = (id, title, content) => {
+    console.log(id,title,content)
+    navigate(`/message`, {
+      replace: true,
+      state: {
+        id, title, content
+      }
+    })
+  }
+
+  // 通过正负数设置后退多少步跳转
+  const goBack = () => {
+    navigate(-1)
+  }
+
+  // 通过正负数设置前进多少步跳转
+  const goForward = () => {
+    navigate(1)
   }
 
   return (
     <div id="app">
       <h2>React Router Demo</h2>
 
-      {/* 原始html中我们使用a标签实现页面的跳转
-    <a href="./about.html">About</a>
-    <a href="./home.html">Home</a> */}
+      <ul>
+        {
+          messageArr.map((message) => {
+            const { id, title, content } = message
+            return (
+              <li key={message.id}>
 
-      {/* 在React中靠 Link组件标签或NavLink 设置路由路径实现切换路由组件，一般是在页面的导航菜单区编写路由链接
-        Link组件标签无法设置点击时临时添加设置ClassName切换样式
-        NavLink组件标签可以设置className属性是个函数，函数的默认参数是个对象，对象有个isActive属性表示是否匹配当前路径，判断这个来设置点击时的样式切换
-        Link和 NavLink的push属性设置当前页面被浏览器记录（默认是push），而replace属性是设置当前页面及其子路由页面不被浏览器记录，
-        即跳转到其他页面后无法回退到之前的页面，但是会继续向更早的页面跳转
-     */}
-      <NavLink className={computedClassname} to="/about">About</NavLink>
-      <br />
-      <NavLink className={computedClassname} to="/home">Home</NavLink>
+                {/* 传递具体的path params参数（路径参数）给路由组件 */}
+                {/* <NavLink className={computedClassname} to={`/message/${id}/${title}/${content}`}>{title}正常跳转</NavLink> */}
 
-      {/* 方式一：手动编写标签完成路由表，即路由路径对应路由组件 */}
-      {/* 通过 Routes组件标签 包裹路由注册，确保一个路径路由只有第一个路由组件会展示，后面其他的不展示
-        Route组件标签必须被Routes组件标签包裹
-    
-        通过 Route组件标签 设置路由路径来注册实际的路由组件，一般路由组件都是在页面数据内容的展示区 
-        可以通过在 Route组件标签 设置caseSensitive属性设置区分大小写，默认不加是不区分大小写
+                {/* 传递具体的query params参数给路由组件 */}
+                {/* <NavLink className={computedClassname} to={`/message/?id=${id}&title=${title}&content=${content}`}>{title}正常跳转</NavLink> */}
 
-        通过 Navigate组件标签 设置默认路径选择的路由进行展示路由组件
-      */}
-      {/* <Routes>
-        <Route path="/about" element={<About />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/" element={<Navigate to="/home" />} />
-        </Routes> */}
+                {/* 传递具体的body params参数给路由组件 */}
+                <NavLink className={computedClassname} to={'/message'} state={{ id, title, content }}>{title}正常跳转</NavLink>
 
-      {/* 方式二：通过useRoutes函数传入路由表对象生成路由表 
-          注意一般在项目中是将路由表对象放在 src/routes/ 目录之下的文件中，然后引用不同的路由表对象
-      */}
+
+                {/* 编程式路由导航，即手动触发事件进行路由导航  */}
+                <button onClick={()=> pushShow(id, title, content)} >push模式路由跳转</button>
+                <button onClick={()=> replaceShow(id, title, content)} > replace模式路由跳转</button>
+              </li>
+            )
+          })
+        }
+      </ul >
+
       {
         useRoutes(
           [
+            // 设置path params参数列表（路径参数列表），通过路径参数向路由组件传递参数
+            // 路由组件可以通过 useParams函数 直接获取传入路径组件的路径参数
+            // {
+            //   path: "/message/:id/:title/:content",
+            //   element: <Message />
+            // }
+
+            // query params参数无需声明接收形参列表，原因是在传递参数给路由组件时已经声明了形参
+            // 路由组件可以通过 useSearchParams函数 获取传入路径组件的query参数
+            // {
+            //   path: "/message",
+            //   element: <Message />
+            // }
+
+            // body params参数也无需声明接收形参列表，原因是在传递参数给路由组件时已经声明了形参 
+            // 路由组件可以在 useLocation()函数返回的location对象下的state属性获取body参数 
             {
-              path: "/about",
-              element: <About />
-            },
-            {
-              path: "/about",
-              element: <About />
-            },
-            {
-              path: "/",
-              element: <Navigate to="/home" />
+              path: "/message",
+              element: <Message />
             }
+
           ]
         )
       }
+
+      {/* 路由的回退与前进，注意当前组件必须是路由组件  */}
+      <button onClick={goBack} >后退</button>
+      <button onClick={goForward} >前进</button>
 
     </div>
   )

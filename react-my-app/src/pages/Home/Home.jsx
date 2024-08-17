@@ -1,25 +1,21 @@
 import React from 'react'
-import { NavLink, Route, Routes, Navigate } from 'react-router-dom';
-import News from '../News/News'
-import Message from '../Message/Message'
+import { NavLink, Outlet } from 'react-router-dom';
+
 
 
 export default function Home() {
     return (
         <div >
             <h2>我是Home的内容</h2>
-            {/* 多级路由Link和注册的注意点就是路由的路径一定要写完整路径，
-        即链接和注册子路由时需要在父路由的path后面添加路径 */}
-            <NavLink to="/home/news">News</NavLink>
+            {/* 多级路由的路径不用写完整路径，而是直接写当前路由的路径（默认会自动继承父路由前缀的），
+                注意多级路由路径不要在开头写/，而是要么直接写 路径 或者 ./路径
+                如下多级路由路径直接写 news 或者 ./message */}
+            <NavLink to="news">News</NavLink>
             <br />
-            <NavLink to="/home/message">Message</NavLink>
+            <NavLink to="./message">Message</NavLink>
 
-            <Routes>
-                <Route path="/home/news" component={News} />
-                <Route path="/home/message" component={Message} />
-
-                <Route path="/home/" element={<Navigate to="/home/message" />} />
-            </Routes>
+            {/* Outlet标签设置路由标签注册出现的位置（和插槽的作用类似） */}
+            <Outlet/>
         </div>
     )
 }
